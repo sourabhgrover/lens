@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux"
 
 class ChatContent extends React.Component {
 
@@ -73,4 +74,11 @@ class ChatContent extends React.Component {
     }
 }
 
-export default ChatContent;
+const mapStateToProps = state => {
+    console.log(state);
+    return {
+        state
+    };
+};
+
+export default connect(mapStateToProps)(ChatContent);
