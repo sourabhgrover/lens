@@ -1,9 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { sendUserMessage } from "../../redux/actions/chatAction";
 
 class ChatFooter extends React.Component {
     state = { userEnteredMessage: '' }
     onSubmit = () => {
-        this.props.onUserMessageSubmit(this.state.userEnteredMessage);
+        this.props.sendUserMessage(this.state.userEnteredMessage);
+        this.setState({ userEnteredMessage: '' });
     }
 
     handleChange = (event) => {
@@ -28,4 +32,4 @@ class ChatFooter extends React.Component {
     }
 }
 
-export default ChatFooter;
+export default connect(null, { sendUserMessage })(ChatFooter);
