@@ -2,11 +2,6 @@ import React from "react";
 
 class ChatContent extends React.Component {
 
-    state = {
-        sessionId: "",
-        responseId: "",
-        queryResult: ""
-    }
     render() {
         return (
             <div className="card-body msg_card_body">

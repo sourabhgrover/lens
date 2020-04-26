@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const ChatHeader = () => {
     return (
@@ -31,4 +31,4 @@ const ChatHeader = () => {
     );
 }
 
-export default ChatHeader;
+export default memo(ChatHeader);
