@@ -20,7 +20,7 @@ class ChatFooter extends React.Component {
                     <div className="input-group-append">
                         <span className="input-group-text attach_btn"><i className="fas fa-redo"></i></span>
                     </div>
-                    <textarea name="userEnteredMessage" className="form-control type_msg" placeholder="Type your message..." onChange={this.handleChange}></textarea>
+                    <textarea name="userEnteredMessage" className="form-control type_msg" placeholder="Type your message..." onChange={this.handleChange} value={this.state.userEnteredMessage} ></textarea>
                     <div className="input-group-append">
                         <span className="input-group-text send_btn" onClick={this.onSubmit}>
                             <i className="fas fa-location-arrow"></i>

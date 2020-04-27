@@ -8,24 +8,23 @@ import BotMessage from "./BotMessage";
 
 class ChatContent extends React.Component {
 
+
     render() {
-        console.log(this.props.chat);
-        if (this.props.chat === undefined) {
-            return <div>Loading...</div>;
+        if (this.props.chat === undefined || !this.props.chat.length) {
+            return <div className="card-body msg_card_body">Please Begin Your Chat</div>;
         }
         return (
             <div className="card-body msg_card_body">
-                {this.props.chat.map(chatMessage => {
-                    console.log(chatMessage);
+                {this.props.chat.map((chatMessage, index) => {
                     if (chatMessage.messageBy === USER) {
                         return (
-                            <UserMessage userMessage={chatMessage.userMessage} />
+                            <UserMessage key={index} userMessage={chatMessage.userMessage} />
                         );
                     }
 
                     if (chatMessage.messageBy === BOT) {
                         return (
-                            <BotMessage {...chatMessage} />
+                            <BotMessage key={index} index={index} {...chatMessage} />
                         );
                     }
                 })}
@@ -35,7 +34,6 @@ class ChatContent extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         chat: state.chat
     };

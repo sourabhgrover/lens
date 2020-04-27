@@ -7,7 +7,7 @@ class UserMessage extends React.Component {
                 {this.props.userMessage}
             </div>
             <div className="img_cont_msg">
-                <img src="img/user.svg" className="rounded-circle user_img_msg" />
+                <img src="img/user.svg" className="rounded-circle user_img_msg " alt="User" />
             </div>
         </div>)
     }

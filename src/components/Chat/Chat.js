@@ -36,7 +36,6 @@ class Chat extends React.Component {
         }).catch((err) => console.log("Can’t access " + err));
     }
     render() {
-        console.log("Render Chat");
         return (
             <div className="container-fluid h-100">
                 <div className="row justify-content-center h-100">
