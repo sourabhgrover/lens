@@ -20,7 +20,6 @@ export const sendUserMessage = (userMessage) => {
         lensApi.post("messages",
             requestData
         ).then(res => {
-            console.log(res);
             if (res.status === 200) {
                 dispatch({
                     type: BOT_RESPONSE,

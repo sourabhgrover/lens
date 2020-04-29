@@ -111,6 +111,7 @@ const BotMessage = (props) => {
 
     //     }
     let { queryResult, attachment } = props;
+    console.log(queryResult);
     return (
         <ChatContainer>
             <ChatImg src={BotImg} alt="bot" />
@@ -120,6 +121,7 @@ const BotMessage = (props) => {
                     <ChatText key={index}> {botRes}</ChatText>
                 );
             })}
+            {/* <ChatText key={10}> {'THIs is my another text need to be get adjusted in second line'}</ChatText> */}
         </ChatContainer>
     );
 };
