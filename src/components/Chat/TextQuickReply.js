@@ -1,54 +1,38 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
-import Color from "color";
-import { IconContext } from "react-icons";
+import TextQuickReplyItem from "./TextQuickReplyItem";
 
-const Box = styled.div`
-  height: 150px;
-  min-width: 150px;
-  margin: 1rem;
-  background-color: #fff;
-  color: ${(props) => props.color};
-  box-shadow: 0 0 5px 2px
-    ${(props) => Color(props.color).darken(0.1).alpha(0.5)};
-  padding: 20px;
-  border-radius: 10px;
+const Wrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  width: 60%;
+  padding: 10px;
+  overflow-x: auto;
+  ${"" /* This is an issue in browser rendering.
+    The dreadful overflow:scroll and padding-right.
+    So using a pseudo element to render right padding.
+   */}
+  &::after {
+    content: "";
+    padding-right: 10px;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const Text = styled.span`
-  text-align: center;
-  font-size: 0.875rem;
-  margin-top: 5px;
-`;
 
 const TextQuickReply = (props) => {
+    let { values } = props;
     return (
-        <Box color={props.color} size={props.size}>
-            <span>
-                <IconContext.Provider value={{ color: props.color, size: "2rem" }}>
-                    {props.icon}
-                </IconContext.Provider>
-            </span>
-            <Text>{props.text}</Text>
-        </Box>
+        <Wrapper>
+
+            {
+                values.map((_values, i) => <TextQuickReplyItem {..._values} ></TextQuickReplyItem>)
+
+            }
+
+        </Wrapper>
     );
-};
-
-TextQuickReply.propTypes = {
-    text: PropTypes.string.isRequired,
-    icon: PropTypes.object.isRequired,
-    color: PropTypes.string.isRequired,
-    size: PropTypes.string,
-};
-
-TextQuickReply.defaultProps = {
-    size: "125px",
 };
 
 export default TextQuickReply;

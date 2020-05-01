@@ -125,7 +125,7 @@ const BotMessage = (props) => {
   //         }
 
   //     }
-  let { queryResult, attachment } = props;
+  let { queryResult } = props;
 
   return (
     <ChatContainer>
