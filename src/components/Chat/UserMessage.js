@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -36,16 +36,16 @@ const ChatText = styled.div`
 `;
 
 const UserMessage = (props) => {
-    return (
-        <ChatContainer>
-            <ChatImg src={UserImg} alt="user" />
-            <ChatText>{props.userMessage}</ChatText>
-        </ChatContainer>
-    );
+  return (
+    <ChatContainer>
+      <ChatImg src={UserImg} alt="user" />
+      <ChatText>{props.userMessage}</ChatText>
+    </ChatContainer>
+  );
 };
 
 UserMessage.propTypes = {
-    userMessage: PropTypes.string.isRequired,
+  userMessage: PropTypes.string.isRequired,
 };
 
-export default UserMessage;
+export default memo(UserMessage);
