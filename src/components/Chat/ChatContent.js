@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
 
 
@@ -8,7 +8,7 @@ import { BOT, USER } from "../../redux/actions/type";
 
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
-import AttachmentContainerInterface from "./AttachmentContainerInterface";
+import AttachmentController from "./AttachmentController";
 
 
 
@@ -17,8 +17,7 @@ class ChatContent extends React.Component {
     renderAttachment(attachment) {
         return (
             attachment.map((singleAttachment, index) => {
-                // console.log(singleAttachment);
-                return (<AttachmentContainerInterface {...singleAttachment} />);
+                return (<AttachmentController key={`A${index}`} {...singleAttachment} />);
             })
         );
 

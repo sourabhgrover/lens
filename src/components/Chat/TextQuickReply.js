@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import TextQuickReplyItem from "./TextQuickReplyItem";
 
 const Wrapper = styled.div`
@@ -21,18 +22,20 @@ const Wrapper = styled.div`
 `;
 
 
-const TextQuickReply = (props) => {
-    let { values } = props;
+const TextQuickReply = ({ title, type, value }) => {
     return (
         <Wrapper>
-
             {
-                values.map((_values, i) => <TextQuickReplyItem {..._values} ></TextQuickReplyItem>)
+                value.map((_value, i) => <TextQuickReplyItem key={i} {..._value} ></TextQuickReplyItem>)
 
             }
-
         </Wrapper>
     );
 };
+
+TextQuickReply.propTypes = {
+    type: PropTypes.string.isRequired,
+    value: PropTypes.array,
+}
 
 export default TextQuickReply;
