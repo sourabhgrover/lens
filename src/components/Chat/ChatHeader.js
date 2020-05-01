@@ -60,6 +60,7 @@ const ChatHeader = () => {
               icon={<FaSignOutAlt />}
               color="#A1373F"
               size="20px"
+              onClick={() => history.push("/")}
             />
           </NavItem>
         </Nav>

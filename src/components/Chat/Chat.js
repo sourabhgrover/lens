@@ -5,6 +5,8 @@ import React from 'react';
 import ChatHeader from "./ChatHeader";
 import ChatInputContainer from "./ChatInputContainer";
 import ChatContent from "./ChatContent";
+import Footer from "../Footer";
+
 
 class Chat extends React.Component {
     render() {
@@ -13,6 +15,7 @@ class Chat extends React.Component {
                 <ChatHeader />
                 <ChatContent />
                 <ChatInputContainer />
+                <Footer />
             </>
         );
     }
