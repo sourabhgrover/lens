@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { sendUserMessage } from "../../redux/actions/chatAction";
 
 const Container = styled.div`
   display: flex;
@@ -26,10 +28,21 @@ const Text = styled.p`
   margin-bottom: 0;
 `;
 
+
+
+
 const TextQuickReplyItem = ({ data, messageToBot }) => {
+  const dispatch = useDispatch();
+  const onSubmit = () => {
+    console.log("comes here");
+    console.log(messageToBot);
+    dispatch(sendUserMessage(messageToBot));
+    // this.props.sendUserMessage(this.state.userEnteredMessage);
+    // this.setState({ userEnteredMessage: '' });
+  }
   return (
     <Container>
-      <Text>{data}</Text>
+      <Text onClick={onSubmit}>{data}</Text>
     </Container>
   );
 };
