@@ -56,20 +56,37 @@ const SpeakButton = styled(BaseButton)`
 
 class ChatInput extends React.Component {
 
-
+  // Intialize state
   state = { userEnteredMessage: '' };
 
+  // Handle Validation
+  handleValidation() {
+    let userEnteredMessage = this.state.userEnteredMessage;
+    let formIsValid = true;
+    //Check if message is empty or not
+    if (!userEnteredMessage) {
+      formIsValid = false;
+    }
+    return formIsValid;
+  }
+
+  // Reset Chat
   resetChat = () => {
     this.props.deleteChat();
     this.props.sendUserMessage(FIRST_MESSAGE);
   }
+
+  // Send Message on submit
   onSubmit = () => {
-    this.props.sendUserMessage(this.state.userEnteredMessage);
-    this.setState({ userEnteredMessage: '' });
+    if (this.handleValidation()) {
+      this.props.sendUserMessage(this.state.userEnteredMessage);
+      this.setState({ userEnteredMessage: '' });
+    }
   }
 
+  // Send Message on Enter 
   _handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.handleValidation()) {
       this.props.sendUserMessage(this.state.userEnteredMessage);
       this.setState({ userEnteredMessage: '' });
     }
