@@ -15,7 +15,7 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
-  return <StyledFooter>Created by Polynomial.ai</StyledFooter>;
+  return <StyledFooter>Created by polynomial.ai</StyledFooter>;
 };
 
 export default Footer;

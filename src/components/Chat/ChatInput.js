@@ -17,11 +17,10 @@ const Wrapper = styled.div`
 
 const StyledInput = styled(Input)`
   border: ${Border};
-  border-left: 0px;
-  border-right: 0px;
-  &:focus,
-  &:active {
-    outline: none;
+  &:focus {
+    box-shadow: inset 0 0 0 ${ButtonColor};
+    border-color: ${ButtonColor};
+    z-index: 1 !important;
   }
 `;
 
@@ -33,7 +32,12 @@ const BaseButton = styled(Button)`
   }
   &:active,
   &:focus {
-    background-color: #aaa;
+    background-color: #fff;
+    box-shadow: none !important;
+    border-color: ${ButtonColor} !important;
+  }
+  &:active {
+    background-color: #ccc !important;
   }
 `;
 

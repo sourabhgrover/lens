@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import {
-    Container,
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    Nav,
-    NavItem,
-    NavLink,
-} from "reactstrap";
+import { Container } from "reactstrap";
 import { FaGoogle } from "react-icons/fa";
 
 import NavButton from "./NavButton";
@@ -45,44 +37,8 @@ const LogoText = styled.p`
 const Home = () => {
     const history = useHistory();
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggle = () => setIsOpen(!isOpen);
-
     return (
         <Wrapper>
-            <Navbar className="align-self-end p-4" light expand="md">
-                <NavbarToggler className="ml-auto" onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink className="h5 text-dark" href="#">
-                                Home
-              </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="h5 text-dark" href="#">
-                                About us
-              </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="h5 text-dark" href="#">
-                                Features
-              </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="h5 text-dark" href="#">
-                                Download
-              </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="h5 text-dark" href="#">
-                                Testimonial
-              </NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
             <Container
                 className="d-flex flex-column justify-content-center align-items-center flex-fill"
                 style={{ maxWidth: "600px" }}

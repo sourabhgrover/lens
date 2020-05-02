@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import styled from "styled-components";
 
-
-
+import { sendUserMessage } from "../../redux/actions/chatAction";
 import { BOT, USER } from "../../redux/actions/type";
+import { FIRST_MESSAGE } from "../../utils/const";
 
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
@@ -16,8 +16,12 @@ const Main = styled(Container)`
 `;
 
 
-
 class ChatContent extends React.Component {
+
+
+    componentDidMount() {
+        this.props.sendUserMessage(FIRST_MESSAGE)
+    }
 
     renderAttachment(attachment) {
         return (
@@ -35,9 +39,12 @@ class ChatContent extends React.Component {
             <Main fluid className="px-2 px-md-3 px-lg-5 mt-5">
                 {
                     this.props.chat.map((chatMessage, index) => {
+                        // Check if message need to be displayed on Bot Screen
+                        if (chatMessage.toDisplayMsg === 0) {
+                            return null;
+                        }
                         return (
                             <React.Fragment key={index}>
-
                                 {
                                     // Show User Message
                                     (chatMessage.messageBy === USER) ? <UserMessage key={index} userMessage={chatMessage.userMessage} /> : ''
@@ -65,9 +72,10 @@ class ChatContent extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
         chat: state.chat
     };
 };
 
-export default connect(mapStateToProps)(ChatContent);
+export default connect(mapStateToProps, { sendUserMessage })(ChatContent);

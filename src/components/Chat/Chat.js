@@ -24,8 +24,10 @@ class Chat extends React.Component {
             <Wrapper>
                 <ChatHeader />
                 <ChatContent />
-                <ChatInputContainer />
-                <Footer />
+                <div>
+                    <ChatInputContainer />
+                    <Footer />
+                </div>
             </Wrapper>
 
         );

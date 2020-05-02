@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
-// import InlineQuickReply from "../containers/InlineQuickReply";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +15,6 @@ const Wrapper = styled.div`
 const ChatInputContainer = () => {
   return (
     <Wrapper>
-      {/* <InlineQuickReply /> */}
       <ChatInput />
     </Wrapper>
   );
