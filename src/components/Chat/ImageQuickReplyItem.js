@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { sendUserMessage } from "../../redux/actions/chatAction";
 import Color from "color";
 
+import { IMG_SRC_URL, IMG_SRC_FILE } from "../../utils/const"
+
 const ImgPath = '/img/';
 const Box = styled.div`
   height: 150px;
@@ -30,13 +32,15 @@ const Text = styled.span`
 `;
 
 
-const ImageQuickReplyItem = ({ source, data: messageFromBot, messageToBot, color }) => {
+const ImageQuickReplyItem = ({ source, imageSource, data: messageFromBot, messageToBot, color }) => {
   let size = 125
   const dispatch = useDispatch();
   return (
     <Box color={color} size={size} onClick={() => dispatch(sendUserMessage(messageToBot))} >
       <span>
-        <img src={`${ImgPath}${source}.png`} alt="Image" />
+        {(imageSource === IMG_SRC_URL) ? <img src={`${source}`} alt="Image" /> : ''}
+
+        {(imageSource === IMG_SRC_FILE) ? <img src={`${ImgPath}${source}.png`} alt="Image" /> : ''}
       </span>
       <Text>{messageFromBot}</Text>
     </Box>

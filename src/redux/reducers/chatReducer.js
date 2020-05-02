@@ -1,4 +1,4 @@
-import { BOT_RESPONSE, USER_REQUEST, BOT, USER } from "../actions/type";
+import { BOT_RESPONSE, USER_REQUEST, BOT, USER, DELETE_CHAT } from "../actions/type";
 import { FIRST_MESSAGE } from "../../utils/const"
 
 
@@ -11,6 +11,8 @@ const chatReducer = (state = intialState, action) => {
             // check if it's first message don't display that message and set it to 0
             let toDisplayMsg = (action.payload.userMessage === FIRST_MESSAGE) ? 0 : 1
             return [...state, { ...action.payload, 'messageBy': USER, toDisplayMsg }];
+        case DELETE_CHAT:
+            return intialState;
         default:
             return state;
     }

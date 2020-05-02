@@ -5,7 +5,8 @@ import { IconContext } from "react-icons";
 import { FaRedo, FaPaperPlane, FaMicrophoneAlt } from "react-icons/fa";
 import { connect } from "react-redux";
 
-import { sendUserMessage } from "../../redux/actions/chatAction";
+import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
+import { FIRST_MESSAGE } from "../../utils/const";
 
 const ButtonColor = `#393939`;
 const Border = `1px solid ${ButtonColor}`;
@@ -58,16 +59,20 @@ class ChatInput extends React.Component {
 
   state = { userEnteredMessage: '' };
 
-
+  resetChat = () => {
+    this.props.deleteChat();
+    this.props.sendUserMessage(FIRST_MESSAGE);
+  }
   onSubmit = () => {
     this.props.sendUserMessage(this.state.userEnteredMessage);
     this.setState({ userEnteredMessage: '' });
   }
+
   render() {
     return (
       <Wrapper>
         <InputGroup size="lg">
-          <InputGroupAddon addonType="prepend">
+          <InputGroupAddon addonType="prepend" onClick={this.resetChat}>
             <ResetButton>
               <IconContext.Provider value={{ color: ButtonColor }}>
                 <FaRedo />
@@ -100,4 +105,4 @@ class ChatInput extends React.Component {
   }
 };
 
-export default connect(null, { sendUserMessage })(ChatInput);
+export default connect(null, { sendUserMessage, deleteChat })(ChatInput);

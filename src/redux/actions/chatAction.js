@@ -1,5 +1,5 @@
 import lensApi from "../../apis/lensApi";
-import { BOT_RESPONSE, USER_REQUEST } from "./type";
+import { BOT_RESPONSE, USER_REQUEST, DELETE_CHAT } from "./type";
 
 export const sendUserMessage = (userMessage) => {
     return dispatch => {
@@ -28,4 +28,9 @@ export const sendUserMessage = (userMessage) => {
             }
         }).catch((err) => console.log("Can’t access " + err));
     }
+}
+
+
+export const deleteChat = () => {
+    return { type: DELETE_CHAT };
 }

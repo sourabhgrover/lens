@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Container } from "reactstrap";
 import styled from "styled-components";
 
-import { sendUserMessage } from "../../redux/actions/chatAction";
+import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
 import { BOT, USER } from "../../redux/actions/type";
 import { FIRST_MESSAGE } from "../../utils/const";
 
@@ -20,13 +20,14 @@ class ChatContent extends React.Component {
 
 
     componentDidMount() {
-        console.log("componentDidMount");
         this.props.sendUserMessage(FIRST_MESSAGE)
     }
 
-    componentDidUpdate() {
-        console.log("componentDidUpdate");
+    componentWillUnmount() {
+        this.props.deleteChat();
     }
+
+
     renderAttachment(attachment) {
         return (
             attachment.map((singleAttachment, index) => {
@@ -76,10 +77,9 @@ class ChatContent extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         chat: state.chat
     };
 };
 
-export default connect(mapStateToProps, { sendUserMessage })(ChatContent);
+export default connect(mapStateToProps, { sendUserMessage, deleteChat })(ChatContent);
