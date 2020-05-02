@@ -25,12 +25,7 @@ const Wrapper = styled.div`
 
 const ImageQuickReply = ({ title, type, value }) => {
   return (
-    // <Wrapper>
-    //   {
-    //     value.map((_value, i) => <ImageQuickReplyItem key={i} {..._value} ></TextQuickReplyItem>)
 
-    //   }
-    // </Wrapper>
     <Container className="w-75 ml-5 ml-sm-0">
       <Row>
 

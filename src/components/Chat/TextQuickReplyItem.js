@@ -7,7 +7,7 @@ import { sendUserMessage } from "../../redux/actions/chatAction";
 const Container = styled.div`
   display: flex;
   padding: 1rem 1.5rem;
-  margin: 0 1rem;
+  margin: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
   cursor: pointer;
