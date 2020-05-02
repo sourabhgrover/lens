@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Navbar, NavbarToggler, Collapse, Nav, NavItem } from "reactstrap";
-import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
+import { Navbar, Collapse, Nav, NavItem } from "reactstrap";
+import { IconContext } from "react-icons";
+import {
+  FaClipboardList,
+  FaSignOutAlt,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 import NavButton from "./NavButton";
 import LogoImg from "../../images/4.png";
@@ -23,11 +29,24 @@ const LogoContainer = styled.a`
 
 const LogoImage = styled.img`
   margin-right: 0.5rem;
-  height: 50px;
+  height: 45px;
 `;
 
-const LogoText = styled.h1`
+const LogoText = styled.h2`
   margin-top: 5px;
+`;
+
+const Toggler = styled.button`
+  background-color: transparent;
+  border: 2px solid #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+  &:focus {
+    outline: none;
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const ChatHeader = () => {
@@ -37,12 +56,16 @@ const ChatHeader = () => {
 
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <NavbarStyled expand="md" className="px-5">
+    <NavbarStyled expand="md" className="px-3 px-md-5">
       <LogoContainer href="javascript:void(0)" onClick={() => history.push("/")}>
         <LogoImage src={LogoImg} alt="Lens!" />
         <LogoText className="text-white">Lens!</LogoText>
       </LogoContainer>
-      <NavbarToggler onClick={toggle} />
+      <Toggler onClick={toggle} type="button" aria-label="Toggle navigation">
+        <IconContext.Provider value={{ size: "24px", color: "#fff" }}>
+          {isOpen ? <FaChevronUp /> : <FaChevronDown />}
+        </IconContext.Provider>
+      </Toggler>
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem className="mx-2">

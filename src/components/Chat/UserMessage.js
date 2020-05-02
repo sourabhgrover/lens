@@ -15,19 +15,21 @@ const ChatImg = styled.img`
   order: 1;
   width: 80px;
   border-radius: 50%;
+  align-self: flex-end;
   margin-left: 1.25rem;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   @media (max-width: 768px) {
     width: 75px;
     margin-left: 1rem;
   }
-  @media (max-width: 552px) {
+  @media (max-width: 576px) {
     width: 50px;
     margin-left: 0.5rem;
   }
 `;
 
 const ChatText = styled.div`
+  max-width: 75%;
   background-color: rgb(94, 158, 235);
   color: white;
   border-radius: 5px;

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container } from "reactstrap";
+import styled from "styled-components";
 
 
 
@@ -9,6 +10,10 @@ import { BOT, USER } from "../../redux/actions/type";
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
 import AttachmentController from "./AttachmentController";
+
+const Main = styled(Container)`
+  flex-grow: 1;
+`;
 
 
 
@@ -24,11 +29,10 @@ class ChatContent extends React.Component {
     }
     render() {
         if (this.props.chat === undefined || !this.props.chat.length) {
-            return <div className="card-body msg_card_body">Please Begin Your Chat</div>;
+            return <Main fluid className="px-2 px-md-3 px-lg-5 mt-5"><div className="card-body msg_card_body">Please Begin Your Chat</div></Main>;
         }
         return (
-            <Container fluid className="px-2 px-md-3 px-lg-5 mt-5">
-
+            <Main fluid className="px-2 px-md-3 px-lg-5 mt-5">
                 {
                     this.props.chat.map((chatMessage, index) => {
                         return (
@@ -55,13 +59,12 @@ class ChatContent extends React.Component {
                     })
                 }
 
-            </Container>
+            </Main>
         );
     }
 }
 
 const mapStateToProps = state => {
-    console.log(state.chat);
     return {
         chat: state.chat
     };
