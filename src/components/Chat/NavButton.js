@@ -11,7 +11,7 @@ const Button = styled.button`
   border: 1px solid ${(props) => props.borderColor};
   border-radius: 3px;
   font-size: ${(props) => props.size};
-  padding: 10px;
+  padding: 8px;
   box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.3);
   &:active,
   &:focus {

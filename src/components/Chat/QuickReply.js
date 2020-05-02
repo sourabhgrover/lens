@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Color from "color";
-import { IconContext } from "react-icons";
 
 const Box = styled.div`
   height: 150px;
@@ -21,21 +20,21 @@ const Box = styled.div`
   cursor: pointer;
 `;
 
+const Img = styled.img`
+  width: 100%;
+`;
+
 const Text = styled.span`
   text-align: center;
   font-size: 0.875rem;
   margin-top: 5px;
 `;
 
-const QuickReply = (props) => {
+const QuickReply = ({ color, size, icon, text, onClick }) => {
   return (
-    <Box color={props.color} size={props.size}>
-      <span>
-        <IconContext.Provider value={{ color: props.color, size: "2rem" }}>
-          {props.icon}
-        </IconContext.Provider>
-      </span>
-      <Text>{props.text}</Text>
+    <Box onClick={onClick} color={color} size={size}>
+      <Img src={icon} alt={text} />
+      <Text>{text}</Text>
     </Box>
   );
 };
@@ -45,6 +44,7 @@ QuickReply.propTypes = {
   icon: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,
   size: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 QuickReply.defaultProps = {

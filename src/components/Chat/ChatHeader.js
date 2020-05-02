@@ -14,7 +14,11 @@ import NavButton from "./NavButton";
 import LogoImg from "../../images/4.png";
 
 const NavbarStyled = styled(Navbar)`
+  position: fixed;
+  top: 0;
+  width: 100%;
   background-color: rgb(249, 201, 0);
+  z-index: 999;
 `;
 
 const LogoContainer = styled.a`
@@ -29,16 +33,16 @@ const LogoContainer = styled.a`
 
 const LogoImage = styled.img`
   margin-right: 0.5rem;
-  height: 45px;
+  height: 36px;
 `;
 
-const LogoText = styled.h2`
-  margin-top: 5px;
+const LogoText = styled.h3`
+  margin-top: 2px;
 `;
 
 const Toggler = styled.button`
   background-color: transparent;
-  border: 2px solid #fff;
+  border: none;
   padding: 0.5rem;
   border-radius: 5px;
   &:focus {
@@ -56,8 +60,8 @@ const ChatHeader = () => {
 
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <NavbarStyled expand="md" className="px-3 px-md-5">
-      <LogoContainer href="javascript:void(0)" onClick={() => history.push("/")}>
+    <NavbarStyled expand="md" className="px-4 px-md-3 py-1">
+      <LogoContainer href="#" onClick={() => history.push("/")}>
         <LogoImage src={LogoImg} alt="Lens!" />
         <LogoText className="text-white">Lens!</LogoText>
       </LogoContainer>
@@ -73,7 +77,7 @@ const ChatHeader = () => {
               text="Summary Details"
               icon={<FaClipboardList />}
               color="#A1373F"
-              size="20px"
+              size="0.875rem"
               onClick={() => history.push("/summary")}
             />
           </NavItem>
@@ -82,7 +86,7 @@ const ChatHeader = () => {
               text="Sign Out"
               icon={<FaSignOutAlt />}
               color="#A1373F"
-              size="20px"
+              size="0.875rem"
               onClick={() => history.push("/")}
             />
           </NavItem>
