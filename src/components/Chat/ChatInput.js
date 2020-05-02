@@ -68,6 +68,13 @@ class ChatInput extends React.Component {
     this.setState({ userEnteredMessage: '' });
   }
 
+  _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.props.sendUserMessage(this.state.userEnteredMessage);
+      this.setState({ userEnteredMessage: '' });
+    }
+  }
+
   render() {
     return (
       <Wrapper>
@@ -84,6 +91,7 @@ class ChatInput extends React.Component {
             value={this.state.userEnteredMessage}
             onChange={(e) => this.setState({ userEnteredMessage: e.target.value })}
             placeholder="Type here... "
+            onKeyDown={this._handleKeyDown}
           />
           <InputGroupAddon addonType="append">
             <SendButton onClick={this.onSubmit}>
