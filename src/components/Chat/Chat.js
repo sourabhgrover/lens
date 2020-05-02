@@ -20,7 +20,6 @@ const Wrapper = styled.div`
 class Chat extends React.Component {
     render() {
         return (
-
             <Wrapper>
                 <ChatHeader />
                 <ChatContent />

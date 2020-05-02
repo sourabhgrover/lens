@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { sendUserMessage } from "../../redux/actions/chatAction";
 import Color from "color";
 
@@ -32,17 +31,16 @@ const Text = styled.span`
 
 
 const ImageQuickReplyItem = ({ source, data: messageFromBot, messageToBot, color }) => {
-
+  let size = 125
   const dispatch = useDispatch();
   return (
-    <Col xs={12} sm={6} md={4} lg={3}>
-      <Box color={color} onClick={() => dispatch(sendUserMessage(messageToBot))} >
-        <span>
-          <img src={`${ImgPath}${source}.png`} alt="Image" />
-        </span>
-        <Text>{messageFromBot}</Text>
-      </Box>
-    </Col >
+    <Box color={color} size={size} onClick={() => dispatch(sendUserMessage(messageToBot))} >
+      <span>
+        <img src={`${ImgPath}${source}.png`} alt="Image" />
+      </span>
+      <Text>{messageFromBot}</Text>
+    </Box>
+
   );
 };
 
@@ -50,5 +48,7 @@ const ImageQuickReplyItem = ({ source, data: messageFromBot, messageToBot, color
 //   data: PropTypes.string.isRequired,
 //   messageToBot: PropTypes.string.isRequired,
 // };
+
+
 
 export default ImageQuickReplyItem;

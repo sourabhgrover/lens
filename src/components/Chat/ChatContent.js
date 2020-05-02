@@ -20,9 +20,13 @@ class ChatContent extends React.Component {
 
 
     componentDidMount() {
+        console.log("componentDidMount");
         this.props.sendUserMessage(FIRST_MESSAGE)
     }
 
+    componentDidUpdate() {
+        console.log("componentDidUpdate");
+    }
     renderAttachment(attachment) {
         return (
             attachment.map((singleAttachment, index) => {
