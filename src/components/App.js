@@ -5,6 +5,7 @@ import './App.css';
 
 import Chat from "./Chat/Chat";
 import Home from "./Home";
+import Summary from "./Summary/Summary";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" exact component={Home}></Route>
         <Route path="/home" component={Home}></Route>
         <Route path="/chat" component={Chat}></Route>
+        <Route path="/summary" component={Summary}></Route>
       </Switch>
     </BrowserRouter>
 
