@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import ImageQuickReplyItem from "./ImageQuickReplyItem";
 import CarouselContainer from "./container/CarouselContainer";
 
-
 const ImageQuickReply = ({ title, type, value }) => {
   return (
-    <CarouselContainer size={200} >
-      {
-        value.map((_value, i) => <ImageQuickReplyItem color="blue" key={i} {..._value} />)
-      }
+    <CarouselContainer>
+      {value.map((_value, i) => (
+        <ImageQuickReplyItem color="blue" key={i} {..._value} />
+      ))}
     </CarouselContainer>
   );
 };
@@ -17,6 +16,6 @@ const ImageQuickReply = ({ title, type, value }) => {
 ImageQuickReply.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.array,
-}
+};
 
 export default ImageQuickReply;

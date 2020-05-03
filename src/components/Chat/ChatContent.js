@@ -12,11 +12,24 @@ import BotMessage from "./BotMessage";
 import AttachmentController from "./AttachmentController";
 
 const Main = styled(Container)`
+  margin: 5rem 0;
   flex-grow: 1;
 `;
 
 
 class ChatContent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.ref = React.createRef()
+    }
+
+    scrollToBottom = () => {
+        this.ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidUpdate = () => {
+        this.scrollToBottom();
+    }
 
 
     componentDidMount() {
@@ -38,10 +51,10 @@ class ChatContent extends React.Component {
     }
     render() {
         if (this.props.chat === undefined || !this.props.chat.length) {
-            return <Main fluid className="px-2 px-md-3 px-lg-5 mt-5"><div className="card-body msg_card_body">Please Begin Your Chat</div></Main>;
+            return <Main fluid className="px-2 px-md-3 px-lg-5"><div className="card-body msg_card_body">Please Begin Your Chat</div></Main>;
         }
         return (
-            <Main fluid className="px-2 px-md-3 px-lg-5 mt-5">
+            <Main fluid className="px-2 px-md-3 px-lg-5">
                 {
                     this.props.chat.map((chatMessage, index) => {
                         // Check if message need to be displayed on Bot Screen
@@ -70,7 +83,7 @@ class ChatContent extends React.Component {
 
                     })
                 }
-
+                <div ref={this.ref}></div>
             </Main>
         );
     }

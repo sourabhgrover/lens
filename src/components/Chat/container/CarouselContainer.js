@@ -1,63 +1,62 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import Carousel from "@brainhubeu/react-carousel";
-import {
-  FaAngleDoubleLeft,
-  FaAngleDoubleRight,
-  FaAngleLeft,
-  FaAngleRight,
-} from "react-icons/fa";
-import "@brainhubeu/react-carousel/lib/style.css";
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import Slider from "react-slick";
+import "./slick.min.css";
+import "./slick-theme.min.css";
 
 const Wrapper = styled.div`
-  width: 50%;
-  padding: 1rem 0;
-  padding-left: ${(props) => props.padding}px;
-  margin: 1rem 75px;
-  @media (max-width: 992px) {
-    width: 60%;
-  }
-  @media (max-width: 768px) {
-    margin: 0 70px;
-    width: 75%;
-  }
-  @media (max-width: 576px) {
-    margin: 0 30px;
-    width: calc(100% - 60px);
-  }
+  width: 100%;
+  margin: 2rem 0 1rem 0;
 `;
 
-const CarouselContainer = ({ children, size, offset, padding }) => {
+const CarouselContainer = ({ children }) => {
   return (
-    <Wrapper padding={padding}>
-      <Carousel
-        slidesPerPage={3}
-        // breakpoints={{
-        //   768: { slidesPerPage: 2 },
-        //   576: { slidesPerPage: 1 },
-        // }}
-        // arrowLeft={<FaAngleDoubleLeft />}
-        // arrowLeftDisabled={<FaAngleLeft />}
-        // arrowRight={<FaAngleDoubleRight />}
-        // arrowRightDisabled={<FaAngleRight />}
-        // addArrowClickHandler
-        arrows={false}
-        dots
-        itemWidth={size}
-        offset={offset}
+    <Wrapper>
+      <Slider
+        dots={false}
+        draggable={true}
+        infinite={false}
+        responsive={[
+          {
+            breakpoint: 992,
+            settings: {
+              slidesToShow: 4,
+            },
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 3,
+            },
+          },
+          {
+            breakpoint: 576,
+            settings: {
+              slidesToShow: 2,
+            },
+          },
+          {
+            breakpoint: 420,
+            settings: {
+              slidesToShow: 1,
+            },
+          },
+        ]}
+        slidesToShow={5}
+        swipeToSlide={true}
+        nextArrow={<FaAngleDoubleRight />}
+        prevArrow={<FaAngleDoubleLeft />}
       >
         {children}
-      </Carousel>
+      </Slider>
     </Wrapper>
   );
 };
 
 CarouselContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  size: PropTypes.number.isRequired,
-  offset: PropTypes.number,
-  padding: PropTypes.number,
 };
 
 export default CarouselContainer;

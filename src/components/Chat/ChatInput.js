@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { InputGroup, InputGroupAddon, Button, Input } from "reactstrap";
 import { IconContext } from "react-icons";
-import { FaRedo, FaPaperPlane, FaMicrophoneAlt } from "react-icons/fa";
+import {
+  FaRedo,
+  FaPaperPlane,
+  FaMicrophoneAlt,
+  FaAssistiveListeningSystems,
+} from "react-icons/fa";
 import { connect } from "react-redux";
 
 import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
@@ -54,10 +59,60 @@ const SpeakButton = styled(BaseButton)`
   border-radius: 0 50px 50px 0 !important;
 `;
 
-class ChatInput extends React.Component {
+// Find out if SpeechRecognition exists in the browser window
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  // Intialize state
-  state = { userEnteredMessage: '' };
+// Initialize the API if exists, else set it to null
+const recognition =
+  SpeechRecognition === undefined ? null : new SpeechRecognition();
+
+class ChatInput extends React.Component {
+  constructor(props) {
+    super(props);
+    // Intialize state
+    this.state = { userEnteredMessage: "", listening: false, supported: false };
+  }
+
+  componentDidMount() {
+    // Check the `recognition` variable and set support accordingly.
+    if (recognition === null) {
+      console.log(recognition);
+      this.setState({ supported: false });
+    } else {
+      this.setState({ supported: true });
+    }
+  }
+
+  handleListen = () => {
+    // If the API is supported on the browser
+    if (this.state.supported) {
+      if (this.state.listening) {
+        // If already listening, stop the speech recognition
+        this.setState({ listening: false }, recognition.stop());
+      } else {
+        // Otherwise, start listening for speech
+        this.setState({ listening: true });
+        recognition.start();
+        recognition.onstart = () => console.log("Voice activated");
+        recognition.onresult = (e) => {
+          // Get the speech result of highest confidence and set it to input bar
+          const result = e.results[e.resultIndex][0].transcript.trim();
+          this.setState({ userEnteredMessage: result });
+        };
+        // When speech ends, automatically stop the recognition
+        recognition.onspeechend = () => {
+          console.log("Voice stopped");
+          this.setState({ listening: false }, recognition.stop());
+        };
+      }
+      // If not supported, display an alert
+    } else {
+      alert("Sorry, WebSpeechAPI currently works only on Chrome and Edge.");
+    }
+  };
+
+
 
   // Handle Validation
   handleValidation() {
@@ -74,8 +129,8 @@ class ChatInput extends React.Component {
   resetChat = () => {
     this.props.deleteChat();
     this.props.sendUserMessage(FIRST_MESSAGE);
-  }
 
+  };
   // Send Message on submit
   onSubmit = () => {
     if (this.handleValidation()) {
@@ -83,7 +138,6 @@ class ChatInput extends React.Component {
       this.setState({ userEnteredMessage: '' });
     }
   }
-
   // Send Message on Enter 
   _handleKeyDown = (e) => {
     if (e.key === 'Enter' && this.handleValidation()) {
@@ -106,7 +160,9 @@ class ChatInput extends React.Component {
           <StyledInput
             type="text"
             value={this.state.userEnteredMessage}
-            onChange={(e) => this.setState({ userEnteredMessage: e.target.value })}
+            onChange={(e) =>
+              this.setState({ userEnteredMessage: e.target.value })
+            }
             placeholder="Type here... "
             onKeyDown={this._handleKeyDown}
           />
@@ -118,16 +174,21 @@ class ChatInput extends React.Component {
             </SendButton>
           </InputGroupAddon>
           <InputGroupAddon addonType="append">
-            <SpeakButton>
+            <SpeakButton onClick={() => this.handleListen()}>
               <IconContext.Provider value={{ color: ButtonColor }}>
-                <FaMicrophoneAlt />
+                {this.state.listening ? (
+                  <FaAssistiveListeningSystems />
+                ) : (
+                    <FaMicrophoneAlt />
+                  )}
               </IconContext.Provider>
             </SpeakButton>
           </InputGroupAddon>
         </InputGroup>
-      </Wrapper >
+      </Wrapper>
     );
   }
-};
+}
+
 
 export default connect(null, { sendUserMessage, deleteChat })(ChatInput);

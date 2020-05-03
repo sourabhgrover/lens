@@ -3,8 +3,9 @@ import styled from "styled-components";
 import ChatInput from "./ChatInput";
 
 const Wrapper = styled.div`
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  margin-top: 3rem;
   padding: 1rem 2.5rem;
   background-color: #f8f8f8;
   @media (max-width: 36rem) {

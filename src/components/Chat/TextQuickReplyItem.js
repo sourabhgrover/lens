@@ -7,17 +7,16 @@ import { sendUserMessage } from "../../redux/actions/chatAction";
 const Container = styled.div`
   display: flex;
   padding: 1rem 1.5rem;
-  margin: 0.5rem;
+  margin: 0.25rem 0.75rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0.5rem rgba(102, 16, 242, 0.5);
   cursor: pointer;
   user-select: none;
   &:active,
   &:focus {
-    box-shadow: 0 0.075rem 0.125rem rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0.25rem rgba(102, 16, 242, 0.5);
   }
 `;
-
 
 const Text = styled.p`
   min-width: 100px;
@@ -28,9 +27,6 @@ const Text = styled.p`
   margin-bottom: 0;
 `;
 
-
-
-
 const TextQuickReplyItem = ({ data, messageToBot }) => {
   const dispatch = useDispatch();
   const onSubmit = () => {
@@ -39,7 +35,7 @@ const TextQuickReplyItem = ({ data, messageToBot }) => {
     dispatch(sendUserMessage(messageToBot));
     // this.props.sendUserMessage(this.state.userEnteredMessage);
     // this.setState({ userEnteredMessage: '' });
-  }
+  };
   return (
     <Container>
       <Text onClick={onSubmit}>{data}</Text>

@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { sendUserMessage } from "../../redux/actions/chatAction";
 import Color from "color";
 
-import { IMG_SRC_URL, IMG_SRC_FILE } from "../../utils/const"
+import { IMG_SRC_URL, IMG_SRC_FILE } from "../../utils/const";
 
-const ImgPath = '/img/';
+const ImgPath = "/img/";
 const Box = styled.div`
   height: 150px;
   min-width: 150px;
@@ -25,26 +25,55 @@ const Box = styled.div`
   cursor: pointer;
 `;
 
+const Img = styled.img`
+  display: block;
+  width: 75px;
+  margin: 0 auto;
+  align-self: center;
+  @media (max-width: 768px) {
+    width: 60px;
+  }
+  @media (max-width: 576px) {
+    width: 50px;
+  }
+`;
+
 const Text = styled.span`
   text-align: center;
   font-size: 0.875rem;
   margin-top: 5px;
 `;
 
-
-const ImageQuickReplyItem = ({ source, imageSource, data: messageFromBot, messageToBot, color }) => {
-  let size = 125
+const ImageQuickReplyItem = ({
+  source,
+  imageSource,
+  data: messageFromBot,
+  messageToBot,
+  color,
+}) => {
+  let size = 125;
   const dispatch = useDispatch();
   return (
-    <Box color={color} size={size} onClick={() => dispatch(sendUserMessage(messageToBot))} >
+    <Box
+      color={color}
+      size={size}
+      onClick={() => dispatch(sendUserMessage(messageToBot))}
+    >
       <span>
-        {(imageSource === IMG_SRC_URL) ? <img src={`${source}`} alt="Image" /> : ''}
+        {imageSource === IMG_SRC_URL ? (
+          <Img src={`${source}`} alt="Quick Reply Icon" />
+        ) : (
+          ""
+        )}
 
-        {(imageSource === IMG_SRC_FILE) ? <img src={`${ImgPath}${source}.png`} alt="Image" /> : ''}
+        {imageSource === IMG_SRC_FILE ? (
+          <Img src={`${ImgPath}${source}.png`} alt="Quick Reply Icon" />
+        ) : (
+          ""
+        )}
       </span>
       <Text>{messageFromBot}</Text>
     </Box>
-
   );
 };
 
@@ -52,7 +81,5 @@ const ImageQuickReplyItem = ({ source, imageSource, data: messageFromBot, messag
 //   data: PropTypes.string.isRequired,
 //   messageToBot: PropTypes.string.isRequired,
 // };
-
-
 
 export default ImageQuickReplyItem;
