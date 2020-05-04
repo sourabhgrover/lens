@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { sendUserMessage } from "../../redux/actions/chatAction";
@@ -61,7 +60,7 @@ const ImageQuickReplyItem = ({
     >
       <span>
         {imageSource === IMG_SRC_URL ? (
-          <Img src={`${source}`} alt="Quick Reply Icon" />
+          <Img src={source} alt="Quick Reply Icon" />
         ) : (
           ""
         )}

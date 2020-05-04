@@ -5,7 +5,7 @@ import CarouselContainer from "./container/CarouselContainer";
 
 const TextQuickReply = ({ title, type, value }) => {
   return (
-    <CarouselContainer>
+    <CarouselContainer variable>
       {value.map((_value, i) => (
         <TextQuickReplyItem key={i} {..._value}></TextQuickReplyItem>
       ))}
