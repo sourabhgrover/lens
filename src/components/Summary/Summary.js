@@ -11,6 +11,11 @@ import Phrases from "./Phrases";
 import KeyboardMicButton from "./KeyboardMicButton";
 import InlineQuickReply from "./InlineQuickReply";
 
+import VerticalBarChart from "../Charts/VerticalBarChart"
+import HorizontalBarChart from "../Charts/HorizontalBarChart"
+import CustomPieChart from "../Charts/CustomPieChart"
+import CustomLineChart from "../Charts/CustomLineChart"
+
 const Summary = (props) => {
   return (
     <Layout>
@@ -33,6 +38,21 @@ const Summary = (props) => {
             <Col xs={12} md={6}>
               <Phrases />
             </Col>
+            <Col xs={12} md={6}>
+              <CustomLineChart />
+            </Col>
+
+            <Col xs={12} md={6}>
+              <VerticalBarChart />
+            </Col>
+            <Col xs={12} md={6}>
+              <HorizontalBarChart />
+            </Col>
+            <Col xs={12} md={6}>
+              <CustomPieChart />
+            </Col>
+
+
           </Row>
         </Container>
         <Container>
