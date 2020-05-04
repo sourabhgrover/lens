@@ -112,8 +112,6 @@ class ChatInput extends React.Component {
     }
   };
 
-
-
   // Handle Validation
   handleValidation() {
     let userEnteredMessage = this.state.userEnteredMessage;
@@ -129,22 +127,21 @@ class ChatInput extends React.Component {
   resetChat = () => {
     this.props.deleteChat();
     this.props.sendUserMessage(FIRST_MESSAGE);
-
   };
   // Send Message on submit
   onSubmit = () => {
     if (this.handleValidation()) {
       this.props.sendUserMessage(this.state.userEnteredMessage);
-      this.setState({ userEnteredMessage: '' });
+      this.setState({ userEnteredMessage: "" });
     }
-  }
-  // Send Message on Enter 
+  };
+  // Send Message on Enter
   _handleKeyDown = (e) => {
-    if (e.key === 'Enter' && this.handleValidation()) {
+    if (e.key === "Enter" && this.handleValidation()) {
       this.props.sendUserMessage(this.state.userEnteredMessage);
-      this.setState({ userEnteredMessage: '' });
+      this.setState({ userEnteredMessage: "" });
     }
-  }
+  };
 
   render() {
     return (
@@ -179,8 +176,8 @@ class ChatInput extends React.Component {
                 {this.state.listening ? (
                   <FaAssistiveListeningSystems />
                 ) : (
-                    <FaMicrophoneAlt />
-                  )}
+                  <FaMicrophoneAlt />
+                )}
               </IconContext.Provider>
             </SpeakButton>
           </InputGroupAddon>
@@ -189,6 +186,5 @@ class ChatInput extends React.Component {
     );
   }
 }
-
 
 export default connect(null, { sendUserMessage, deleteChat })(ChatInput);

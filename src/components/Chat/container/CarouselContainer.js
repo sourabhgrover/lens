@@ -3,15 +3,16 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import Slider from "react-slick";
-import "./slick.min.css";
-import "./slick-theme.min.css";
+import "./slick.css";
+import "./slick-theme.css";
 
 const Wrapper = styled.div`
+  height: inherit;
   width: 100%;
   margin: 2rem 0 1rem 0;
 `;
 
-const CarouselContainer = ({ children }) => {
+const CarouselContainer = ({ children, variable = false, type }) => {
   return (
     <Wrapper>
       <Slider
@@ -22,19 +23,19 @@ const CarouselContainer = ({ children }) => {
           {
             breakpoint: 992,
             settings: {
-              slidesToShow: 4,
+              slidesToShow: type === "hero" ? 3 : 4,
             },
           },
           {
             breakpoint: 768,
             settings: {
-              slidesToShow: 3,
+              slidesToShow: type === "hero" ? 2 : 3,
             },
           },
           {
             breakpoint: 576,
             settings: {
-              slidesToShow: 2,
+              slidesToShow: type === "hero" ? 1 : 2,
             },
           },
           {
@@ -44,8 +45,9 @@ const CarouselContainer = ({ children }) => {
             },
           },
         ]}
-        slidesToShow={5}
+        slidesToShow={type === "hero" ? 3 : 5}
         swipeToSlide={true}
+        variableWidth={variable}
         nextArrow={<FaAngleDoubleRight />}
         prevArrow={<FaAngleDoubleLeft />}
       >
@@ -57,6 +59,8 @@ const CarouselContainer = ({ children }) => {
 
 CarouselContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  variable: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 export default CarouselContainer;

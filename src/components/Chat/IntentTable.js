@@ -25,124 +25,112 @@ const TableBodyContainer = styled.tbody`
   color: #fff;
 `;
 
-const IntentTable = ({ data }) => {
-  // Optional chaining
-  const res = data.queryResult?.attachment?.[0];
-  const type = res ? res.type : undefined;
-  if (type === "excel") {
-    const { body } = res;
-    // Get the first object from res
-    const { headings, data } = body[Object.keys(body)];
-
-    return (
-      <div className="table-responsive-md mt-4">
-        <Table bordered>
-          <TableHeadContainer>
-            <tr>
-              {headings.map((heading) => {
-                // Destructure the keys from object
-                const { id, title, icon } = heading;
-                // Check if icon exists.
-                let image, isAvaiable;
-                try {
-                  image = require(`../../images/${icon}`);
-                  isAvaiable = true;
-                } catch {
-                  isAvaiable = false;
-                }
-                return (
-                  <th key={id}>
-                    <TableHead>
-                      {isAvaiable ? (
-                        <img src={image} width="32px" alt="table head icon" />
-                      ) : null}
-                      <TableHeadText>{title}</TableHeadText>
-                    </TableHead>
-                  </th>
-                );
-              })}
-            </tr>
-          </TableHeadContainer>
-          <TableBodyContainer>
-            {data.map((entry) => {
-              // Iterate over the headings
+const IntentTable = (props) => {
+  const { headings, data } = props.data;
+  // console.log(headings, data);
+  return (
+    <div className="table-responsive-md mt-4">
+      <Table bordered>
+        <TableHeadContainer>
+          <tr>
+            {headings.map((heading) => {
+              // Destructure the keys from object
+              const { id, title, icon } = heading;
+              // Check if icon exists.
+              let image, isAvaiable;
+              try {
+                image = require(`../../images/${icon}`);
+                isAvaiable = true;
+              } catch {
+                isAvaiable = false;
+              }
               return (
-                <tr key={entry["ID"]}>
-                  {Object.values(headings).map((heading) => {
-                    // Extract title from heading
-
-                    const { title } = heading;
-                    // Using a switch statement for different
-                    // heading types
-                    switch (title) {
-                      case "ID":
-                        return (
-                          <td style={{ width: "10px", textAlign: "center" }}>
-                            {entry[title]}
-                          </td>
-                        );
-                      case "Review":
-                        return (
-                          <td style={{ width: "360px" }}>{entry[title]}</td>
-                        );
-                      case "Emotion":
-                      case "Persona":
-                        return (
-                          <td style={{ width: "120px" }}>{entry[title]}</td>
-                        );
-                      case "Tones":
-                      case "Key Phrases":
-                        return <td>{entry[title].join("\n")}</td>;
-                      case "Intent By Sentences":
-                        return (
-                          <td
-                            style={{
-                              whiteSpace: "pre-line",
-                              width: "320px",
-                            }}
-                          >
-                            {entry[title].map((intent) => {
-                              let intentData = [];
-                              for (let prop in intent) {
-                                intentData.push(`${prop} - ${intent[prop]}`);
-                              }
-                              intentData.push("\n");
-                              return intentData.join("\n");
-                            })}
-                          </td>
-                        );
-                      case "Key Words":
-                        return (
-                          <td
-                            style={{
-                              whiteSpace: "pre-line",
-                              width: "240px",
-                            }}
-                          >
-                            {entry[title].map((keyword) => {
-                              const { Keyword, score } = keyword;
-                              return `${Keyword} - ${score}\n`;
-                            })}
-                          </td>
-                        );
-                      default:
-                        return null;
-                    }
-                  })}
-                </tr>
+                <th key={id}>
+                  <TableHead>
+                    {isAvaiable ? (
+                      <img src={image} width="32px" alt="table head icon" />
+                    ) : null}
+                    <TableHeadText>{title}</TableHeadText>
+                  </TableHead>
+                </th>
               );
             })}
-          </TableBodyContainer>
-        </Table>
-      </div>
-    );
-  } else {
-    return null;
-  }
+          </tr>
+        </TableHeadContainer>
+        <TableBodyContainer>
+          {data.map((entry) => {
+            // Iterate over the headings
+            return (
+              <tr key={entry["ID"]}>
+                {Object.values(headings).map((heading) => {
+                  // Extract title from heading
+
+                  const { title } = heading;
+                  // Using a switch statement for different
+                  // heading types
+                  switch (title) {
+                    case "ID":
+                      return (
+                        <td style={{ width: "10px", textAlign: "center" }}>
+                          {entry[title]}
+                        </td>
+                      );
+                    case "Review":
+                      return <td style={{ width: "360px" }}>{entry[title]}</td>;
+                    case "Emotion":
+                    case "Persona":
+                      return <td style={{ width: "120px" }}>{entry[title]}</td>;
+                    case "Tones":
+                    case "Key Phrases":
+                      return <td>{entry[title].join("\n")}</td>;
+                    case "Intent By Sentences":
+                      return (
+                        <td
+                          style={{
+                            whiteSpace: "pre-line",
+                            width: "320px",
+                          }}
+                        >
+                          {entry[title].map((intent) => {
+                            let intentData = [];
+                            for (let prop in intent) {
+                              intentData.push(`${prop} - ${intent[prop]}`);
+                            }
+                            intentData.push("\n");
+                            return intentData.join("\n");
+                          })}
+                        </td>
+                      );
+                    case "Key Words":
+                      return (
+                        <td
+                          style={{
+                            whiteSpace: "pre-line",
+                            width: "240px",
+                          }}
+                        >
+                          {entry[title].map((keyword) => {
+                            const { Keyword, score } = keyword;
+                            return `${Keyword} - ${score}\n`;
+                          })}
+                        </td>
+                      );
+                    default:
+                      return null;
+                  }
+                })}
+              </tr>
+            );
+          })}
+        </TableBodyContainer>
+      </Table>
+    </div>
+  );
 };
 
 IntentTable.propTypes = {
-  data: PropTypes.object.isRequired,
+  headings: PropTypes.object.isRequired,
+  data: PropTypes.object,
 };
 
 export default IntentTable;

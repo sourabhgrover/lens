@@ -21,19 +21,25 @@ const Box = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
+  display: block;
+  width: 60px;
+  margin: 0 auto;
+  align-self: center;
+  @media (max-width: 576px) {
+    width: 50px;
+  }
 `;
 
 const Text = styled.span`
   text-align: center;
   font-size: 0.875rem;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
-const QuickReply = ({ color, size, icon, text, onClick }) => {
+const QuickReply = ({ color, size, image, text, onClick }) => {
   return (
     <Box onClick={onClick} color={color} size={size}>
-      <Img src={icon} alt={text} />
+      <Img src={image} alt={text} />
       <Text>{text}</Text>
     </Box>
   );
@@ -41,14 +47,14 @@ const QuickReply = ({ color, size, icon, text, onClick }) => {
 
 QuickReply.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.object.isRequired,
+  image: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   size: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 QuickReply.defaultProps = {
-  size: "125px",
+  color: "#407294",
 };
 
 export default QuickReply;
