@@ -1,36 +1,9 @@
 import React, { PureComponent } from 'react';
 import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+    BarChart, Bar, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
-import styled from "styled-components";
-
-
-const Card = styled.div`
-  width: 100%;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
-  @media (max-width: 768px) {
-    margin: 1rem 0;
-  }
-`;
-
-const Title = styled.h3`
-  text-align: center;
-  padding: 1rem;
-`;
-
-const Separtor = styled.hr`
-  width: 100%;
-  margin-top: -1rem;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.5rem;
-`;
+import ChartContainer from "./ChartContainer"
 
 
 const data = [
@@ -58,14 +31,11 @@ const data = [
 ];
 
 export default class VerticalBarChart extends PureComponent {
-    static jsfiddleUrl = 'https://jsfiddle.net/alidingling/30763kr7/';
 
     render() {
         return (
-            <Card>
-                <Title>Test</Title>
-                <Separtor />
-                <Content>
+            <ResponsiveContainer>
+                <ChartContainer title={this.props['name:']} >
                     <BarChart
                         width={500}
                         height={300}
@@ -82,8 +52,8 @@ export default class VerticalBarChart extends PureComponent {
                         <Bar dataKey="pv" fill="#8884d8" />
                         <Bar dataKey="uv" fill="#82ca9d" />
                     </BarChart>
-                </Content>
-            </Card>
+                </ChartContainer>
+            </ResponsiveContainer>
         );
     }
 }
