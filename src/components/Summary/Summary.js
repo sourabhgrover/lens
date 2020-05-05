@@ -15,7 +15,7 @@ import InlineQuickReply from "./InlineQuickReply";
 
 import VerticalBarChart from "../Charts/VerticalBarChart"
 import HorizontalBarChart from "../Charts/HorizontalBarChart"
-import DoughNutChart from "../Charts/DoughNutChart"
+import CustomDoughNutChart from "../Charts/CustomDoughNutChart"
 import CustomLineChart from "../Charts/CustomLineChart"
 
 const Summary = (props) => {
@@ -36,30 +36,30 @@ const Summary = (props) => {
 
   const renderChart = () => {
     return (
-      charts.map(singleChart => {
+      charts.map((singleChart, i) => {
 
         switch (singleChart?.viewType) {
           case DOUGHNUT_CHART:
             return (
-              <Col xs={12} md={6}>
-                <DoughNutChart {...singleChart} />
+              <Col xs={12} md={6} key={i}>
+                <CustomDoughNutChart {...singleChart} />
               </Col>
             )
           case VERTICAL_BAR_CHART:
             return (
-              <Col xs={12} md={6}>
+              <Col xs={12} md={6} key={i}>
                 <VerticalBarChart {...singleChart} />
               </Col>
             )
           case HORIZONTAL_BAR_CHART:
             return (
-              <Col xs={12} md={6}>
+              <Col xs={12} md={6} key={i}>
                 <HorizontalBarChart {...singleChart} />
               </Col>
             )
           case LINE_CHART:
             return (
-              <Col xs={12} md={6}>
+              <Col xs={12} md={6} key={i}>
                 <CustomLineChart {...singleChart} />
               </Col>
             )

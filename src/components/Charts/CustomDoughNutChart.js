@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell } from 'recharts';
 
-import PropTypes from "prop-types";
 import ChartContainer from "./ChartContainer"
 
 
@@ -55,8 +54,7 @@ const renderActiveShape = (props) => {
 };
 
 
-export default class DoughNutChart extends PureComponent {
-
+export default class CustomDoughNutChart extends PureComponent {
 
     state = {
         activeIndex: 0,
@@ -94,7 +92,7 @@ export default class DoughNutChart extends PureComponent {
                         onMouseEnter={this.onPieEnter}
                     >
                         {
-                            graphData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+                            graphData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
                         }
                     </Pie>
                 </PieChart>
