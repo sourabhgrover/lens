@@ -1,41 +1,12 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector } from 'recharts';
-import styled from "styled-components";
+import { PieChart, Pie, Sector, Cell } from 'recharts';
+
+import PropTypes from "prop-types";
+import ChartContainer from "./ChartContainer"
 
 
-const Card = styled.div`
-  width: 100%;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
-  @media (max-width: 768px) {
-    margin: 1rem 0;
-  }
-`;
 
-const Title = styled.h3`
-  text-align: center;
-  padding: 1rem;
-`;
-
-const Separtor = styled.hr`
-  width: 100%;
-  margin-top: -1rem;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.5rem;
-`;
-
-const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-];
-
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FFBB28', '#FF8042'];
 const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
     const {
@@ -85,40 +56,54 @@ const renderActiveShape = (props) => {
 
 
 export default class CustomPieChart extends PureComponent {
-    static jsfiddleUrl = 'https://jsfiddle.net/alidingling/hqnrgxpj/';
+
 
     state = {
         activeIndex: 0,
     };
 
-    onPieEnter = (data, index) => {
+    onPieEnter = (graphData, index) => {
         this.setState({
             activeIndex: index,
         });
     };
 
     render() {
+
+        var graphData = []
+        this.props.values.map((v) => {
+
+            graphData.push({
+                name: Object.keys(v)[0], value: Number(Object.values(v)[0])
+            });
+        })
+
         return (
-            <Card>
-                <Title>Test</Title>
-                <Separtor />
-                <Content>
-                    <PieChart width={400} height={400}>
-                        <Pie
-                            activeIndex={this.state.activeIndex}
-                            activeShape={renderActiveShape}
-                            data={data}
-                            cx={200}
-                            cy={200}
-                            innerRadius={60}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                            onMouseEnter={this.onPieEnter}
-                        />
-                    </PieChart>
-                </Content>
-            </Card>
+            <ChartContainer title={this.props['name:']} >
+                <PieChart width={500} height={400}>
+                    <Pie
+                        activeIndex={this.state.activeIndex}
+                        activeShape={renderActiveShape}
+                        data={graphData}
+                        cx={200}
+                        cy={200}
+                        innerRadius={60}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                        onMouseEnter={this.onPieEnter}
+                    >
+                        {
+                            graphData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]} />)
+                        }
+                    </Pie>
+                </PieChart>
+            </ChartContainer>
         );
     }
 }
+
+CustomPieChart.propTypes = {
+    name: PropTypes.string.isRequired,
+    values: PropTypes.array,
+};

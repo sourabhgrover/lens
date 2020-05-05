@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "reactstrap";
+import _ from "lodash";
+
+import { sendSummaryMessage } from "../../redux/actions/summaryAction";
+import { SUMMARY_MESSAGE, DOUGHNUT_CHART, VERTICAL_BAR_CHART, HORIZONTAL_BAR_CHART, LINE_CHART } from "../../utils/const"
 
 import Layout from "./Layout";
 import Intent from "./Intent";
@@ -17,6 +22,52 @@ import CustomPieChart from "../Charts/CustomPieChart"
 import CustomLineChart from "../Charts/CustomLineChart"
 
 const Summary = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(sendSummaryMessage(SUMMARY_MESSAGE))
+  }, []);
+  const summaryData = useSelector(state => state.summary);
+  console.log(summaryData);
+
+  const charts = summaryData[0]?.attachment[0]?.value[0]?.views;
+
+  console.log(charts);
+
+  const renderChart = () => {
+    return (
+      charts.map(singleChart => {
+
+        switch (singleChart?.viewType) {
+          case DOUGHNUT_CHART:
+            return (
+              <Col xs={12} md={6}>
+                <CustomPieChart {...singleChart} />
+              </Col>
+            )
+          case VERTICAL_BAR_CHART:
+            return (
+              <Col xs={12} md={6}>
+                <VerticalBarChart {...singleChart} />
+              </Col>
+            )
+          case HORIZONTAL_BAR_CHART:
+            return (
+              <Col xs={12} md={6}>
+                <HorizontalBarChart {...singleChart} />
+              </Col>
+            )
+          case LINE_CHART:
+            return (
+              <Col xs={12} md={6}>
+                <CustomLineChart {...singleChart} />
+              </Col>
+            )
+          default:
+            return null;
+        }
+      })
+    );
+  }
   return (
     <Layout>
       <Container fluid className="py-3">
@@ -26,7 +77,7 @@ const Summary = (props) => {
         </div>
         <Container>
           <Row>
-            <Col xs={12} md={6}>
+            {/* <Col xs={12} md={6}>
               <Tone />
             </Col>
             <Col xs={12} md={6}>
@@ -40,18 +91,12 @@ const Summary = (props) => {
             </Col>
             <Col xs={12} md={6}>
               <CustomLineChart />
-            </Col>
+            </Col> */}
 
-            <Col xs={12} md={6}>
-              <VerticalBarChart />
-            </Col>
-            <Col xs={12} md={6}>
-              <HorizontalBarChart />
-            </Col>
-            <Col xs={12} md={6}>
-              <CustomPieChart />
-            </Col>
 
+            {
+              (charts === undefined) ? '' : renderChart()
+            }
 
           </Row>
         </Container>

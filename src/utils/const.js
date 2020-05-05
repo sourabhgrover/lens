@@ -1,6 +1,7 @@
 export const DOUGHNUT_CHART = "doughnut_chart";
-export const BAR_CHART = "bargraph_vertical";
+export const VERTICAL_BAR_CHART = "bargraph_vertical";
 export const HORIZONTAL_BAR_CHART = "bargraph_horizontal";
+export const LINE_CHART = "list_vertical";
 
 export const ATTACHMENT_TYPE_HERO_IMAGE = "carousal";
 export const ATTACHMENT_TYPE_QUICKREPLY_TEXT = "quickReplytext";
@@ -15,3 +16,4 @@ export const ATTACHMENT_TYPE_EXCEL = "excel";
 export const FIRST_MESSAGE = "firstmessage";
 export const IMG_SRC_FILE = "filename";
 export const IMG_SRC_URL = "url";
+export const SUMMARY_MESSAGE = "show summary";
