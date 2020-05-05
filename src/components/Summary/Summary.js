@@ -4,14 +4,11 @@ import PropTypes from "prop-types";
 import { Container, Row, Col } from "reactstrap";
 import _ from "lodash";
 
-import { sendSummaryMessage } from "../../redux/actions/summaryAction";
+import { sendSummaryMessage, clearSummary } from "../../redux/actions/summaryAction";
 import { SUMMARY_MESSAGE, DOUGHNUT_CHART, VERTICAL_BAR_CHART, HORIZONTAL_BAR_CHART, LINE_CHART } from "../../utils/const"
 
 import Layout from "./Layout";
-import Intent from "./Intent";
-import Persona from "./Persona";
-import Tone from "./Tone";
-import Phrases from "./Phrases";
+
 
 import KeyboardMicButton from "./KeyboardMicButton";
 import InlineQuickReply from "./InlineQuickReply";
@@ -25,13 +22,18 @@ const Summary = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(sendSummaryMessage(SUMMARY_MESSAGE))
+    return () => {
+      dispatch(clearSummary())
+    }
   }, []);
-  const summaryData = useSelector(state => state.summary);
+  const summaryData = useSelector(state => {
+    console.log(state)
+    return state.summary
+  });
   console.log(summaryData);
 
   const charts = summaryData[0]?.attachment[0]?.value[0]?.views;
 
-  console.log(charts);
 
   const renderChart = () => {
     return (

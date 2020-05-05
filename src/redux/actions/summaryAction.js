@@ -1,5 +1,5 @@
 import lensApi from "../../apis/lensApi";
-import { BOT_RESPONSE, } from "./type";
+import { BOT_SUMMARY_RESPONSE, CLEAR_SUMMARY } from "./type";
 
 export const sendSummaryMessage = (userMessage) => {
   return (dispatch) => {
@@ -18,7 +18,7 @@ export const sendSummaryMessage = (userMessage) => {
       .then((res) => {
         if (res.status === 200) {
           dispatch({
-            type: BOT_RESPONSE,
+            type: BOT_SUMMARY_RESPONSE,
             payload: res.data,
           });
         }
@@ -26,4 +26,11 @@ export const sendSummaryMessage = (userMessage) => {
       .catch((err) => console.log("Can’t access " + err));
   };
 };
+
+export const clearSummary = () => {
+  console.log("clear summary");
+  return {
+    type: CLEAR_SUMMARY
+  }
+}
 
