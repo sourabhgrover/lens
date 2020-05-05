@@ -103,6 +103,3 @@ export default class DoughNutChart extends PureComponent {
     }
 }
 
-DoughNutChart.propTypes = {
-    values: PropTypes.array,
-};
