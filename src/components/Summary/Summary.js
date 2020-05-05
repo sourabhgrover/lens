@@ -15,7 +15,7 @@ import InlineQuickReply from "./InlineQuickReply";
 
 import VerticalBarChart from "../Charts/VerticalBarChart"
 import HorizontalBarChart from "../Charts/HorizontalBarChart"
-import CustomPieChart from "../Charts/CustomPieChart"
+import DoughNutChart from "../Charts/DoughNutChart"
 import CustomLineChart from "../Charts/CustomLineChart"
 
 const Summary = (props) => {
@@ -27,10 +27,9 @@ const Summary = (props) => {
     }
   }, []);
   const summaryData = useSelector(state => {
-    console.log(state)
     return state.summary
   });
-  console.log(summaryData);
+
 
   const charts = summaryData[0]?.attachment[0]?.value[0]?.views;
 
@@ -43,7 +42,7 @@ const Summary = (props) => {
           case DOUGHNUT_CHART:
             return (
               <Col xs={12} md={6}>
-                <CustomPieChart {...singleChart} />
+                <DoughNutChart {...singleChart} />
               </Col>
             )
           case VERTICAL_BAR_CHART:
