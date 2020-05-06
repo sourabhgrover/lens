@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Navbar, Collapse, Nav, NavItem } from "reactstrap";
 import { IconContext } from "react-icons";
@@ -10,6 +11,8 @@ import {
   FaChevronUp,
   FaHome
 } from "react-icons/fa";
+
+import { deleteChat } from "../../redux/actions/chatAction";
 
 import NavButton from "./NavButton";
 import LogoImg from "../../images/4.png";
@@ -54,11 +57,16 @@ const Toggler = styled.button`
   }
 `;
 
-const ChatHeader = (props) => {
+const ChatHeader = () => {
 
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useDispatch();
 
+  const signOut = () => {
+    dispatch(deleteChat());
+    history.push("/");
+  }
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -99,7 +107,7 @@ const ChatHeader = (props) => {
               icon={<FaSignOutAlt />}
               color="#A1373F"
               size="0.875rem"
-              onClick={() => history.push("/")}
+              onClick={signOut}
             />
           </NavItem>
         </Nav>
