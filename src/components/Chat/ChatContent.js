@@ -31,11 +31,18 @@ class ChatContent extends React.Component {
   };
 
   componentDidMount() {
-    this.props.sendUserMessage(FIRST_MESSAGE);
+    // Check if Chat doesnot exist send first message
+    if (this.props.chat === undefined || !this.props.chat.length) {
+      this.props.sendUserMessage(FIRST_MESSAGE);
+    }
+    // If chat has some message scroll to bottom
+    if (this.props.chat.length) {
+      this.scrollToBottom();
+    }
   }
 
   componentWillUnmount() {
-    this.props.deleteChat();
+    // this.props.deleteChat();
   }
 
   renderAttachment(attachment) {
@@ -68,8 +75,8 @@ class ChatContent extends React.Component {
                     userMessage={chatMessage.userMessage}
                   />
                 ) : (
-                  ""
-                )
+                    ""
+                  )
               }
 
               {
@@ -77,15 +84,15 @@ class ChatContent extends React.Component {
                 chatMessage.messageBy === BOT ? (
                   <BotMessage key={index} {...chatMessage} />
                 ) : (
-                  ""
-                )
+                    ""
+                  )
               }
 
               {
                 // Show Bot Attachments
                 chatMessage.messageBy === BOT &&
-                typeof chatMessage.attachment !== "undefined" &&
-                chatMessage.attachment.length > 0
+                  typeof chatMessage.attachment !== "undefined" &&
+                  chatMessage.attachment.length > 0
                   ? this.renderAttachment(chatMessage.attachment)
                   : ""
               }

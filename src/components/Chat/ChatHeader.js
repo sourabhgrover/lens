@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Navbar, Collapse, Nav, NavItem } from "reactstrap";
 import { IconContext } from "react-icons";
@@ -8,6 +8,7 @@ import {
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
+  FaHome
 } from "react-icons/fa";
 
 import NavButton from "./NavButton";
@@ -53,15 +54,17 @@ const Toggler = styled.button`
   }
 `;
 
-const ChatHeader = () => {
+const ChatHeader = (props) => {
+
   const history = useHistory();
+  const location = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
   return (
     <NavbarStyled expand="md" className="px-4 px-md-3 py-1">
-      <LogoContainer href="#" onClick={() => history.push("/")}>
+      <LogoContainer href="#" onClick={() => history.push("/chat")}>
         <LogoImage src={LogoImg} alt="Lens!" />
         <LogoText className="text-white">Lens!</LogoText>
       </LogoContainer>
@@ -73,13 +76,22 @@ const ChatHeader = () => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem className="mx-2">
-            <NavButton
-              text="Summary Details"
-              icon={<FaClipboardList />}
-              color="#A1373F"
-              size="0.875rem"
-              onClick={() => history.push("/summary")}
-            />
+            {
+              (location.pathname === '/summary') ? <NavButton
+                text="Home"
+                icon={<FaHome />}
+                color="#A1373F"
+                size="0.875rem"
+                onClick={() => history.push("/chat")}
+              /> : <NavButton
+                  text="Summary Details"
+                  icon={<FaClipboardList />}
+                  color="#A1373F"
+                  size="0.875rem"
+                  onClick={() => history.push("/summary")}
+                />
+            }
+
           </NavItem>
           <NavItem className="mx-2">
             <NavButton
