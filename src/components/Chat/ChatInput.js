@@ -9,6 +9,7 @@ import {
   FaAssistiveListeningSystems,
 } from "react-icons/fa";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
 import { FIRST_MESSAGE } from "../../utils/const";
@@ -131,18 +132,23 @@ class ChatInput extends React.Component {
   // Send Message on submit
   onSubmit = () => {
     if (this.handleValidation()) {
-      this.props.sendUserMessage(this.state.userEnteredMessage);
-      this.setState({ userEnteredMessage: "" });
+      this.callSendMessageAction();
     }
   };
   // Send Message on Enter
   _handleKeyDown = (e) => {
     if (e.key === "Enter" && this.handleValidation()) {
-      this.props.sendUserMessage(this.state.userEnteredMessage);
-      this.setState({ userEnteredMessage: "" });
+      this.callSendMessageAction();
     }
   };
 
+  callSendMessageAction() {
+    this.props.sendUserMessage(this.state.userEnteredMessage);
+    this.setState({ userEnteredMessage: "" });
+    if (this.props.location.pathname === '/summary') {
+      this.props.history.push("/chat");
+    }
+  }
   render() {
     return (
       <Wrapper>
@@ -176,8 +182,8 @@ class ChatInput extends React.Component {
                 {this.state.listening ? (
                   <FaAssistiveListeningSystems />
                 ) : (
-                  <FaMicrophoneAlt />
-                )}
+                    <FaMicrophoneAlt />
+                  )}
               </IconContext.Provider>
             </SpeakButton>
           </InputGroupAddon>
@@ -187,4 +193,4 @@ class ChatInput extends React.Component {
   }
 }
 
-export default connect(null, { sendUserMessage, deleteChat })(ChatInput);
+export default withRouter(connect(null, { sendUserMessage, deleteChat })(ChatInput));

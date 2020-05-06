@@ -3,6 +3,17 @@ import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { FaRegKeyboard, FaMicrophoneAlt } from "react-icons/fa";
 
+const Wrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem 2.5rem;
+  background-color: #f8f8f8;
+  @media (max-width: 36rem) {
+    padding: 1rem;
+  }
+`;
+
 const ButtonContainer = styled.div`
   width: 10rem;
   display: flex;
@@ -18,18 +29,21 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const KeyboardMicButton = () => {
+const KeyboardMicButton = (props) => {
+
   return (
-    <ButtonContainer>
-      <IconContext.Provider value={{ color: "#3a3a3a", size: "32px" }}>
-        <span>
-          <FaRegKeyboard />
-        </span>
-        <span>
-          <FaMicrophoneAlt />
-        </span>
-      </IconContext.Provider>
-    </ButtonContainer>
+    <Wrapper>
+      <ButtonContainer onClick={props.onClick}>
+        <IconContext.Provider value={{ color: "#3a3a3a", size: "32px" }}>
+          <span>
+            <FaRegKeyboard />
+          </span>
+          <span>
+            <FaMicrophoneAlt />
+          </span>
+        </IconContext.Provider>
+      </ButtonContainer>
+    </Wrapper>
   );
 };
 
