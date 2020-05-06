@@ -1,7 +1,7 @@
 import React from "react";
 import TextQuickReply from "./TextQuickReply";
 import ImageQuickReply from "./ImageQuickReply";
-import IntentTable from "./IntentTable";
+import IntentTable from "../Table/IntentTable";
 import HeroImage from "./HeroImage";
 import QuickReplyAction from "./QuickReplyAction";
 
@@ -22,7 +22,7 @@ const AttachmentController = (props) => {
     case ATTACHMENT_TYPE_QUICKREPLY_ACTION:
       return <QuickReplyAction {...props} />;
     case ATTACHMENT_TYPE_EXCEL:
-      return <IntentTable data={props.value[0]} />;
+      return <IntentTable title={props.title} data={props.value[0]} />;
     case ATTACHMENT_TYPE_HERO_IMAGE:
       return <HeroImage {...props} />;
     default:

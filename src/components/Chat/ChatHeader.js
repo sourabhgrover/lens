@@ -9,7 +9,7 @@ import {
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
-  FaHome
+  FaHome,
 } from "react-icons/fa";
 
 import { deleteChat } from "../../redux/actions/chatAction";
@@ -58,7 +58,6 @@ const Toggler = styled.button`
 `;
 
 const ChatHeader = () => {
-
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -66,7 +65,7 @@ const ChatHeader = () => {
   const signOut = () => {
     dispatch(deleteChat());
     history.push("/");
-  }
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -83,23 +82,35 @@ const ChatHeader = () => {
       </Toggler>
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          <NavItem className="mx-2">
-            {
-              (location.pathname === '/summary') ? <NavButton
+          {location.pathname === "/table" ? (
+            <NavItem className="mx-2">
+              <NavButton
                 text="Home"
                 icon={<FaHome />}
                 color="#A1373F"
                 size="0.875rem"
                 onClick={() => history.push("/chat")}
-              /> : <NavButton
-                  text="Summary Details"
-                  icon={<FaClipboardList />}
-                  color="#A1373F"
-                  size="0.875rem"
-                  onClick={() => history.push("/summary")}
-                />
-            }
-
+              />
+            </NavItem>
+          ) : null}
+          <NavItem className="mx-2">
+            {location.pathname === "/summary" ? (
+              <NavButton
+                text="Home"
+                icon={<FaHome />}
+                color="#A1373F"
+                size="0.875rem"
+                onClick={() => history.push("/chat")}
+              />
+            ) : (
+              <NavButton
+                text="Summary Details"
+                icon={<FaClipboardList />}
+                color="#A1373F"
+                size="0.875rem"
+                onClick={() => history.push("/summary")}
+              />
+            )}
           </NavItem>
           <NavItem className="mx-2">
             <NavButton
