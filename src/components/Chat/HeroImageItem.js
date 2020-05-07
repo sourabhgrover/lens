@@ -16,14 +16,19 @@ const StyledCard = styled(Card)`
   }
 `;
 
+const StyledImage = styled(CardImg)`
+  object-fit: cover;
+  height: 25vh;
+`;
+
 const Title = styled.h4`
   font-family: "Proxima Bold";
 `;
 
-const HeroImageItem = ({ title, subtitle, imageUrl, description, size }) => {
+const HeroImageItem = ({ title, subtitle, imageUrl, description }) => {
   return (
     <StyledCard>
-      <CardImg top width="100%" src={imageUrl} />
+      <StyledImage top width="100%" src={imageUrl} />
       <CardBody>
         <Title>{title}</Title>
         <CardSubtitle className="text-secondary">{subtitle}</CardSubtitle>
@@ -38,7 +43,6 @@ HeroImageItem.propTypes = {
   subtitle: PropTypes.string,
   imageUrl: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  size: PropTypes.number,
 };
 
 export default HeroImageItem;

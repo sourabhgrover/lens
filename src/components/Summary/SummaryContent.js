@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
 
 
 import { sendSummaryMessage, clearSummary } from "../../redux/actions/summaryAction";
 import { SUMMARY_MESSAGE, DOUGHNUT_CHART, VERTICAL_BAR_CHART, HORIZONTAL_BAR_CHART, LINE_CHART } from "../../utils/const"
-
-
-
-
 import VerticalBarChart from "../Charts/VerticalBarChart"
 import HorizontalBarChart from "../Charts/HorizontalBarChart"
 import CustomDoughNutChart from "../Charts/CustomDoughNutChart"
@@ -26,22 +22,21 @@ const SummaryContent = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(sendSummaryMessage(SUMMARY_MESSAGE))
+    dispatch(sendSummaryMessage(SUMMARY_MESSAGE));
     return () => {
-      dispatch(clearSummary())
-    }
+      dispatch(clearSummary());
+    };
   }, []);
 
-  const summaryData = useSelector(state => {
-    return state.summary
+  const summaryData = useSelector((state) => {
+    return state.summary;
   });
 
   console.log(summaryData);
 
-
-
   const summaryTitle = summaryData[0]?.attachment[0]?.value[0]?.title;
-  const summaryDescription = summaryData[0]?.attachment[0]?.value[0]?.description;
+  const summaryDescription =
+    summaryData[0]?.attachment[0]?.value[0]?.description;
   const charts = summaryData[0]?.attachment[0]?.value[0]?.views;
 
   const renderChart = () => {
@@ -76,28 +71,27 @@ const SummaryContent = () => {
       })
     );
   }
+
   if (summaryData.length === 0 || summaryData === undefined) {
-    return <div>Page is loading</div>
+    return <div>Page is loading</div>;
   }
 
   return (
-
     <Main fluid className="px-2 px-md-3 px-lg-5">
-      <SummaryContentHeader title={summaryTitle} description={summaryDescription} />
+      <SummaryContentHeader
+        title={summaryTitle}
+        description={summaryDescription}
+      />
       <Container>
-        <Row>
-
-          {
-            (charts === undefined) ? '' : renderChart()
-          }
-
+        <Row
+          className="d-flex flex-wrap
+        "
+        >
+          {charts === undefined ? "" : renderChart()}
         </Row>
       </Container>
     </Main>
-
   );
 };
-
-
 
 export default SummaryContent;

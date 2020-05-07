@@ -27,17 +27,14 @@ const Content = styled.div`
   padding: 1rem 1.5rem;
 `;
 
-
 const ChartContainer = (props) => {
-    return (
-        <Card>
-            <Title>{props.title}</Title>
-            <Separtor />
-            <Content>
-                {props.children}
-            </Content>
-        </Card>
-    );
-}
+  return (
+    <Card>
+      <Title>{props.title}</Title>
+      <Separtor />
+      <Content>{props.children}</Content>
+    </Card>
+  );
+};
 
 export default ChartContainer;
