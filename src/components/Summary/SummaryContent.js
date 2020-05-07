@@ -10,13 +10,9 @@ import { SUMMARY_MESSAGE, DOUGHNUT_CHART, VERTICAL_BAR_CHART, HORIZONTAL_BAR_CHA
 
 
 
-
-import InlineQuickReply from "./InlineQuickReply";
-
 import VerticalBarChart from "../Charts/VerticalBarChart"
 import HorizontalBarChart from "../Charts/HorizontalBarChart"
 import CustomDoughNutChart from "../Charts/CustomDoughNutChart"
-import CustomLineChart from "../Charts/CustomLineChart"
 import SummaryContentHeader from "./SummaryContentHeader"
 
 
@@ -25,7 +21,7 @@ const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
 `;
-const SummaryContent = (props) => {
+const SummaryContent = () => {
 
   const dispatch = useDispatch();
 
@@ -73,11 +69,7 @@ const SummaryContent = (props) => {
               </Col>
             )
           case LINE_CHART:
-            return (
-              <Col xs={12} md={6} key={i}>
-                <CustomLineChart {...singleChart} />
-              </Col>
-            )
+            return null;
           default:
             return null;
         }

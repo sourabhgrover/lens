@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { PieChart, Pie, Sector, Cell } from 'recharts';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 
 import ChartContainer from "./ChartContainer"
 
@@ -78,24 +78,26 @@ export default class CustomDoughNutChart extends PureComponent {
 
         return (
             <ChartContainer title={this.props['name:']} >
-                <PieChart width={500} height={400}>
-                    <Pie
-                        activeIndex={this.state.activeIndex}
-                        activeShape={renderActiveShape}
-                        data={graphData}
-                        cx={200}
-                        cy={200}
-                        innerRadius={60}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                        onMouseEnter={this.onPieEnter}
-                    >
-                        {
-                            graphData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
-                        }
-                    </Pie>
-                </PieChart>
+                <ResponsiveContainer width="100%" height={400} >
+                    <PieChart width={500} height={400}>
+                        <Pie
+                            activeIndex={this.state.activeIndex}
+                            activeShape={renderActiveShape}
+                            data={graphData}
+                            cx={200}
+                            cy={200}
+                            innerRadius={60}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                            onMouseEnter={this.onPieEnter}
+                        >
+                            {
+                                graphData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
+                            }
+                        </Pie>
+                    </PieChart>
+                </ResponsiveContainer>
             </ChartContainer>
         );
     }

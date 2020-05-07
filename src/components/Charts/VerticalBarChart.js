@@ -21,22 +21,24 @@ export default class VerticalBarChart extends PureComponent {
         return (
             <ResponsiveContainer>
                 <ChartContainer title={this.props['name:']} >
-                    <BarChart
-                        width={500}
-                        height={300}
-                        data={graphData}
-                        margin={{
-                            top: 5, right: 30, left: 20, bottom: 5,
-                        }}
-                    >
+                    <ResponsiveContainer width="100%" height={400} >
+                        <BarChart
+                            width={500}
+                            height={400}
+                            data={graphData}
+                            margin={{
+                                top: 5, right: 30, left: 20, bottom: 5,
+                            }}
+                        >
 
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="value" fill="#8884d8" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="value" fill="#8884d8" />
 
-                    </BarChart>
+                        </BarChart>
+                    </ResponsiveContainer>
                 </ChartContainer>
             </ResponsiveContainer>
         );

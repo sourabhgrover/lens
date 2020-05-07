@@ -17,8 +17,9 @@ export default class HorizontalBarChart extends PureComponent {
             });
         })
         return (
-            <ResponsiveContainer>
-                <ChartContainer title={this.props['name:']} >
+
+            <ChartContainer title={this.props['name:']} >
+                <ResponsiveContainer width="100%" height={400} >
                     <ComposedChart
                         layout="vertical"
                         width={500}
@@ -36,8 +37,9 @@ export default class HorizontalBarChart extends PureComponent {
                         <Bar dataKey="value" barSize={20} fill="#FFBB28" />
 
                     </ComposedChart>
-                </ChartContainer>
-            </ResponsiveContainer>
+                </ResponsiveContainer>
+            </ChartContainer>
+
         );
     }
 }
