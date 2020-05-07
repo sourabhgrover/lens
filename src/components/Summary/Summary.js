@@ -4,8 +4,7 @@ import styled from "styled-components";
 import SummaryContent from "./SummaryContent";
 import ChatHeader from "../Chat/ChatHeader";
 
-
-import SummaryFooter from "./SummaryFooter"
+import SummaryFooter from "./SummaryFooter";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -24,7 +23,6 @@ const Summary = () => {
       <SummaryContent />
       <SummaryFooter />
     </Wrapper>
-
   );
 };
 

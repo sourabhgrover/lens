@@ -1,0 +1,76 @@
+.thead-style {
+  background-color: #462a50;
+  color: #fff;
+  text-align: center;
+}
+
+.tbody-style {
+  background-color: #4f355a;
+  color: #fff;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+.react-bootstrap-table-page-btns-ul {
+  float: right;
+  margin-top: 0px !important;
+}
+
+.react-bootstrap-table-page-btns-ul .page-link {
+  background-color: #462a50 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.react-bootstrap-table-pagination {
+  margin: 0;
+}
+
+.react-bootstrap-table-pagination-list-hidden {
+  display: none;
+}
+
+.react-bootstrap-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.react-bootstrap-table th.sortable:focus {
+  outline: none;
+}
+
+.react-bootstrap-table th>.react-bootstrap-table-sort-order>.caret {
+  margin: 10px 6.5px;
+}
+
+.react-bootstrap-table th .order-4:before {
+  margin-left: 3.5px;
+  content: "\2191";
+  opacity: 0.4;
+}
+
+.react-bootstrap-table th .order-4:after {
+  content: "\2193";
+  opacity: 0.4;
+}
+
+.react-bootstrap-table th .caret-4-asc:before {
+  margin-left: 3.5px;
+  content: "\2191";
+}
+
+.react-bootstrap-table th .caret-4-asc:after {
+  content: "\2193";
+  opacity: 0.4;
+}
+
+.react-bootstrap-table th .caret-4-desc:before {
+  margin-left: 3.5px;
+  content: "\2191";
+  opacity: 0.4;
+}
+
+.react-bootstrap-table th .caret-4-desc:after {
+  content: "\2193";
+}
