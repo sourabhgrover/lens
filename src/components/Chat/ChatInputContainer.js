@@ -13,10 +13,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const ChatInputContainer = () => {
+const ChatInputContainer = (props) => {
   return (
     <Wrapper>
-      <ChatInput />
+      <ChatInput onDoubleClick={props.onDoubleClick} />
     </Wrapper>
   );
 };

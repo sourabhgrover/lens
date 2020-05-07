@@ -5,6 +5,7 @@ import ChatHeader from "./ChatHeader";
 import ChatInputContainer from "./ChatInputContainer";
 import ChatContent from "./ChatContent";
 import Footer from "../Footer";
+import TextBar from "../Summary/TextBar";
 
 
 
@@ -24,10 +25,7 @@ class Chat extends React.Component {
             <Wrapper>
                 <ChatHeader />
                 <ChatContent />
-                <div>
-                    <ChatInputContainer />
-                    <Footer />
-                </div>
+                <TextBar />
             </Wrapper>
 
         );

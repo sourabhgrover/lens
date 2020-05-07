@@ -47,16 +47,11 @@ const Home = () => {
                     <LogoImage src={LogoImg} alt="Lens" />
                     <LogoText>Lens!</LogoText>
                 </Logo>
-                <h3 className="mt-4 text-uppercase">Virtual Market Researcher</h3>
+                <h4 className="mt-4 text-uppercase">Natural Language Interpreting Solution</h4>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                    minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in
-                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+                    Lens runs on multi brain architecture making it a highly customizable solution for enterprise developers to easily solve problems around text understanding.
+                    You can use Lens as a Virtual Product Manager, a Virtual Market Researcher, a Business Analyst assisting respective personas. Finally, its called Lens because you can really converse with it to know what inside your data!
+                 </p>
                 <NavButton
                     icon={<FaGoogle />}
                     text="Login with Google"
