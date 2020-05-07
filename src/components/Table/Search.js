@@ -28,7 +28,7 @@ const Search = ({ onClear, onSearch }) => {
 };
 
 Search.propTypes = {
-  searchCall: PropTypes.func.isRequired,
+  onSearch: PropTypes.func,
   onClear: PropTypes.func,
 };
 

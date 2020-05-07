@@ -1,7 +1,6 @@
 import React, { useMemo, Fragment } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Button } from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
@@ -10,8 +9,6 @@ import "./table.css";
 import Search from "./Search";
 
 const IntentTable = ({ title, data, showSearch }) => {
-  const history = useHistory();
-
   let columns = useMemo(() => {
     let header = [];
     data.headings.map((x) =>
@@ -91,7 +88,7 @@ const IntentTable = ({ title, data, showSearch }) => {
               showSearch: true,
             },
           }}
-          className="float-right my-1 p-1"
+          className="btn btn-primary float-right my-1 p-2"
         >
           Read More
         </Link>

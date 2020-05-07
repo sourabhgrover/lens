@@ -106,7 +106,7 @@ export default class CustomDoughNutChart extends PureComponent {
 
     return (
       <ChartContainer title={this.props["name:"]}>
-        <ResponsiveContainer width="100%" height={400}>
+        <ResponsiveContainer width="99%" height={400}>
           <PieChart width={500} height={400}>
             <Pie
               activeIndex={this.state.activeIndex}
