@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import SummaryContent from "./SummaryContent";
 import ChatHeader from "../Chat/ChatHeader";
-
 import SummaryFooter from "./SummaryFooter";
 
 const Wrapper = styled.div`

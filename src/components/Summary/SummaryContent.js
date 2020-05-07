@@ -3,31 +3,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
 
-import {
-  sendSummaryMessage,
-  clearSummary,
-} from "../../redux/actions/summaryAction";
-import {
-  SUMMARY_MESSAGE,
-  DOUGHNUT_CHART,
-  VERTICAL_BAR_CHART,
-  HORIZONTAL_BAR_CHART,
-  LINE_CHART,
-} from "../../utils/const";
 
-import InlineQuickReply from "./InlineQuickReply";
+import { sendSummaryMessage, clearSummary } from "../../redux/actions/summaryAction";
+import { SUMMARY_MESSAGE, DOUGHNUT_CHART, VERTICAL_BAR_CHART, HORIZONTAL_BAR_CHART, LINE_CHART } from "../../utils/const"
+import VerticalBarChart from "../Charts/VerticalBarChart"
+import HorizontalBarChart from "../Charts/HorizontalBarChart"
+import CustomDoughNutChart from "../Charts/CustomDoughNutChart"
+import SummaryContentHeader from "./SummaryContentHeader"
 
-import VerticalBarChart from "../Charts/VerticalBarChart";
-import HorizontalBarChart from "../Charts/HorizontalBarChart";
-import CustomDoughNutChart from "../Charts/CustomDoughNutChart";
-import CustomLineChart from "../Charts/CustomLineChart";
-import SummaryContentHeader from "./SummaryContentHeader";
+
 
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
 `;
-const SummaryContent = (props) => {
+const SummaryContent = () => {
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,37 +40,38 @@ const SummaryContent = (props) => {
   const charts = summaryData[0]?.attachment[0]?.value[0]?.views;
 
   const renderChart = () => {
-    return charts.map((singleChart, i) => {
-      switch (singleChart?.viewType) {
-        case DOUGHNUT_CHART:
-          return (
-            <Col xs={12} xl={6} key={i}>
-              <CustomDoughNutChart {...singleChart} />
-            </Col>
-          );
-        case VERTICAL_BAR_CHART:
-          return (
-            <Col xs={12} xl={6} key={i}>
-              <VerticalBarChart {...singleChart} />
-            </Col>
-          );
-        case HORIZONTAL_BAR_CHART:
-          return (
-            <Col xs={12} xl={6} key={i}>
-              <HorizontalBarChart {...singleChart} />
-            </Col>
-          );
-        case LINE_CHART:
-          return (
-            <Col xs={12} xl={6} key={i}>
-              <CustomLineChart {...singleChart} />
-            </Col>
-          );
-        default:
-          return null;
-      }
-    });
-  };
+    return (
+
+      charts.map((singleChart, i) => {
+
+        switch (singleChart?.viewType) {
+          case DOUGHNUT_CHART:
+            return (
+              <Col xs={12} md={6} key={i}>
+                <CustomDoughNutChart {...singleChart} />
+              </Col>
+            )
+          case VERTICAL_BAR_CHART:
+            return (
+              <Col xs={12} md={6} key={i}>
+                <VerticalBarChart {...singleChart} />
+              </Col>
+            )
+          case HORIZONTAL_BAR_CHART:
+            return (
+              <Col xs={12} md={6} key={i}>
+                <HorizontalBarChart {...singleChart} />
+              </Col>
+            )
+          case LINE_CHART:
+            return null;
+          default:
+            return null;
+        }
+      })
+    );
+  }
+
   if (summaryData.length === 0 || summaryData === undefined) {
     return <div>Page is loading</div>;
   }
