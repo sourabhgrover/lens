@@ -168,6 +168,7 @@ class ChatInput extends React.Component {
             }
             placeholder="Type here... "
             onKeyDown={this._handleKeyDown}
+            onDoubleClick={this.props.onDoubleClick}
           />
           <InputGroupAddon addonType="append">
             <SendButton onClick={this.onSubmit}>
