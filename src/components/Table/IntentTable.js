@@ -90,7 +90,7 @@ const IntentTable = ({ title, data, showSearch }) => {
           }}
           className="btn btn-primary float-right my-1 p-2"
         >
-          Read More
+          Maximize
         </Link>
       )}
       <div className="table-responsive">

@@ -118,4 +118,8 @@
     align-items: center;
 }
 
+.slick-disabled {
+    visibility: hidden;
+}
+
 /*# sourceMappingURL=slick.min.css.map */

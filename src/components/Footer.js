@@ -9,6 +9,7 @@ const StyledFooter = styled.footer`
   color: white;
   padding: 0.25rem 1rem;
   font-size: 1rem;
+  z-index: 3;
 `;
 
 const Footer = () => {
