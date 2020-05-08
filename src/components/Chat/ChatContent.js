@@ -22,8 +22,8 @@ class ChatContent extends React.Component {
     this.ref = React.createRef();
   }
 
-  scrollToBottom = () => {
-    this.ref.current.scrollIntoView({ behavior: "smooth" });
+  scrollToBottom = (direct = false) => {
+    this.ref.current.scrollIntoView({ behavior: direct ? "auto" : "smooth" });
   };
 
   componentDidUpdate = () => {
@@ -38,6 +38,10 @@ class ChatContent extends React.Component {
     // If chat has some message scroll to bottom
     if (this.props.chat.length) {
       this.scrollToBottom();
+    }
+    console.log(this.props);
+    if (this.props.history?.scrollToBottom) {
+      this.scrollToBottom(true);
     }
   }
 
@@ -75,8 +79,8 @@ class ChatContent extends React.Component {
                     userMessage={chatMessage.userMessage}
                   />
                 ) : (
-                    ""
-                  )
+                  ""
+                )
               }
 
               {
@@ -84,15 +88,15 @@ class ChatContent extends React.Component {
                 chatMessage.messageBy === BOT ? (
                   <BotMessage key={index} {...chatMessage} />
                 ) : (
-                    ""
-                  )
+                  ""
+                )
               }
 
               {
                 // Show Bot Attachments
                 chatMessage.messageBy === BOT &&
-                  typeof chatMessage.attachment !== "undefined" &&
-                  chatMessage.attachment.length > 0
+                typeof chatMessage.attachment !== "undefined" &&
+                chatMessage.attachment.length > 0
                   ? this.renderAttachment(chatMessage.attachment)
                   : ""
               }
