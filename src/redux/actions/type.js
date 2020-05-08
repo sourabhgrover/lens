@@ -6,3 +6,5 @@ export const BOT = 2;
 export const DELETE_CHAT = "DELETE_CHAT";
 export const BOT_SUMMARY_RESPONSE = "BOT_SUMMARY_RESPONSE";
 export const CLEAR_SUMMARY = "CLEAR_SUMMARY";
+export const DISPLAY_QR_CARDS = "DISPLAY_QR_CARDS";
+export const HIDE_QR_CARDS = "HIDE_QR_CARDS";

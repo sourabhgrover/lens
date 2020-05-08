@@ -69,7 +69,6 @@ const IntentTable = ({
   let columns = useMemo(() => {
     let header = [];
     data.headings.map((x) => {
-      console.log(x);
       header.push({
         text: x.title,
         dataField: x.id,
@@ -81,6 +80,13 @@ const IntentTable = ({
               width: "25%",
             }
           : "",
+        sortFunc: (a, b, order, dataField) => {
+          if (dataField === "col1") {
+            return order === "asc" ? a - b : b - a;
+          } else {
+            return a.localeCompare(b);
+          }
+        },
       });
     });
     return header;

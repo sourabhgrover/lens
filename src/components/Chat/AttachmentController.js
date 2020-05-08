@@ -1,9 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import TextQuickReply from "./TextQuickReply";
-import ImageQuickReply from "./ImageQuickReply";
 import IntentTable from "../Table/IntentTable";
 import HeroImage from "./HeroImage";
 import QuickReplyAction from "./QuickReplyAction";
+
+import {
+  displayQuickReply,
+  hideQuickReply,
+} from "../../redux/actions/quickReplyAction";
 
 import {
   ATTACHMENT_TYPE_HERO_IMAGE,
@@ -14,11 +19,16 @@ import {
 } from "../../utils/const";
 
 const AttachmentController = (props) => {
+  if (props.type !== ATTACHMENT_TYPE_QUICKREPLY_IMAGE) {
+    props.hideQuickReply();
+  }
   switch (props.type) {
     case ATTACHMENT_TYPE_QUICKREPLY_TEXT:
       return <TextQuickReply {...props} />;
     case ATTACHMENT_TYPE_QUICKREPLY_IMAGE:
-      return <ImageQuickReply {...props} />;
+      props.displayQuickReply(props.value);
+      return null;
+    // return <ImageQuickReply {...props} />;
     case ATTACHMENT_TYPE_QUICKREPLY_ACTION:
       return <QuickReplyAction {...props} />;
     case ATTACHMENT_TYPE_EXCEL:
@@ -36,4 +46,9 @@ const AttachmentController = (props) => {
   }
 };
 
-export default AttachmentController;
+const mapDispatchToProps = (dispatch) => ({
+  displayQuickReply: (data) => dispatch(displayQuickReply(data)),
+  hideQuickReply: () => dispatch(hideQuickReply()),
+});
+
+export default connect(null, mapDispatchToProps)(AttachmentController);

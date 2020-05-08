@@ -14,6 +14,7 @@ import AttachmentController from "./AttachmentController";
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
+  padding-bottom: ${(props) => (props.qrActive ? "275px" : "0px")};
 `;
 
 class ChatContent extends React.Component {
@@ -47,9 +48,9 @@ class ChatContent extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    // this.props.deleteChat();
-  }
+  // componentWillUnmount() {
+  // this.props.deleteChat();
+  // }
 
   renderAttachment(attachment) {
     return attachment.map((singleAttachment, index) => {
@@ -65,7 +66,11 @@ class ChatContent extends React.Component {
       );
     }
     return (
-      <Main fluid className="px-2 px-md-3 px-lg-5">
+      <Main
+        fluid
+        className="px-2 px-md-3 px-lg-5"
+        qrActive={this.props.isQuickReplyActive ? true : false}
+      >
         {this.props.chat.map((chatMessage, index) => {
           // Check if message need to be displayed on Bot Screen
           if (chatMessage.toDisplayMsg === 0) {
@@ -115,6 +120,7 @@ const mapStateToProps = (state) => {
   return {
     chat: state.chat,
     table: state.table,
+    isQuickReplyActive: state.quickReply.displayQuickReply,
   };
 };
 

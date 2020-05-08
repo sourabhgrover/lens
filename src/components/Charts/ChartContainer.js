@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Card = styled.div`
   width: 100%;
-  margin: 1rem;
+  margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
   @media (max-width: 768px) {
@@ -27,6 +27,7 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem 1.5rem;
+  margin: 1rem;
 `;
 
 const ChartContainer = (props) => {
