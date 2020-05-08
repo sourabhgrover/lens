@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 1rem 2.5rem;
   background-color: #f8f8f8;
+  z-index: 3;
   @media (max-width: 36rem) {
     padding: 1rem;
   }

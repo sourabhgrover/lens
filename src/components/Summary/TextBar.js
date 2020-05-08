@@ -11,7 +11,7 @@ const TextBar = ({ history }) => {
     if (history?.scrollToBottom) {
       setInputType(1);
     }
-  });
+  }, [history]);
 
   // If input type text is double clicked make it back to mic and key board icon
   const handleDoubleClick = () => {

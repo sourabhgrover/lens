@@ -105,7 +105,12 @@ const ChatHeader = () => {
                 icon={<FaHome />}
                 color="#A1373F"
                 size="0.875rem"
-                onClick={() => history.push("/chat")}
+                onClick={() =>
+                  history.push({
+                    pathname: "/chat",
+                    state: { scrollToBottom: true },
+                  })
+                }
               />
             ) : (
               <NavButton

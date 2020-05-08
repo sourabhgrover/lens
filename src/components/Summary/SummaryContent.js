@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, Col } from "reactstrap";
 import styled from "styled-components";
@@ -18,6 +18,7 @@ import VerticalBarChart from "../Charts/VerticalBarChart";
 import HorizontalBarChart from "../Charts/HorizontalBarChart";
 import CustomDoughNutChart from "../Charts/CustomDoughNutChart";
 import SummaryContentHeader from "./SummaryContentHeader";
+import "./summary.css";
 
 const Main = styled(Container)`
   margin: 5rem 0;
@@ -33,11 +34,7 @@ const SummaryContent = () => {
     };
   }, []);
 
-  const summaryData = useSelector((state) => {
-    return state.summary;
-  });
-
-  console.log(summaryData);
+  const summaryData = useSelector((state) => state.summary);
 
   const summaryTitle = summaryData[0]?.attachment[0]?.value[0]?.title;
   const summaryDescription =
@@ -49,19 +46,19 @@ const SummaryContent = () => {
       switch (singleChart?.viewType) {
         case DOUGHNUT_CHART:
           return (
-            <Col lg={12} xl={6} key={i}>
+            <Col lg={12} xl={6} className="d-flex" key={i}>
               <CustomDoughNutChart {...singleChart} />
             </Col>
           );
         case VERTICAL_BAR_CHART:
           return (
-            <Col lg={12} xl={6} key={i}>
+            <Col lg={12} xl={6} className="d-flex" key={i}>
               <VerticalBarChart {...singleChart} />
             </Col>
           );
         case HORIZONTAL_BAR_CHART:
           return (
-            <Col lg={12} xl={6} key={i}>
+            <Col lg={12} xl={6} className="d-flex" key={i}>
               <HorizontalBarChart {...singleChart} />
             </Col>
           );
@@ -78,18 +75,13 @@ const SummaryContent = () => {
   }
 
   return (
-    <Main fluid className="px-2 px-md-3 px-lg-5">
+    <Main fluid className="pb-5 px-2 px-md-3 px-lg-5">
       <SummaryContentHeader
         title={summaryTitle}
         description={summaryDescription}
       />
       <Container>
-        <Row
-          className="d-flex flex-wrap
-        "
-        >
-          {charts === undefined ? "" : renderChart()}
-        </Row>
+        <Row>{charts === undefined ? "" : renderChart()}</Row>
       </Container>
     </Main>
   );

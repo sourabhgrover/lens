@@ -23,7 +23,10 @@ class ChatContent extends React.Component {
   }
 
   scrollToBottom = (direct = false) => {
-    this.ref.current.scrollIntoView({ behavior: direct ? "auto" : "smooth" });
+    // passing direct to this forces scrolling instantly, instead of animating.
+    if (this.ref.current?.scrollIntoView) {
+      this.ref.current.scrollIntoView({ behavior: direct ? "auto" : "smooth" });
+    }
   };
 
   componentDidUpdate = () => {
@@ -39,7 +42,6 @@ class ChatContent extends React.Component {
     if (this.props.chat.length) {
       this.scrollToBottom();
     }
-    console.log(this.props);
     if (this.props.history?.scrollToBottom) {
       this.scrollToBottom(true);
     }

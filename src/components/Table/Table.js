@@ -11,7 +11,11 @@ const Table = (props) => {
     <Layout>
       <Container className="mt-4 pb-3" fluid>
         {props.location.state ? (
-          <IntentTable {...props.location.state} />
+          <IntentTable
+            {...props.location.state}
+            perPage={50}
+            allowOverflow={true}
+          />
         ) : (
           <Fragment>
             <h3>

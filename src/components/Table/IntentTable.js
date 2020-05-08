@@ -1,6 +1,7 @@
 import React, { useMemo, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
@@ -8,18 +9,20 @@ import "./table.css";
 
 import Search from "./Search";
 
-const IntentTable = ({ title, data, showSearch }) => {
-  let columns = useMemo(() => {
-    let header = [];
-    data.headings.map((x) =>
-      header.push({
-        text: x.title,
-        dataField: x.id,
-        sort: true,
-      })
-    );
-    return header;
-  });
+const ResponsiveContainer = styled.div`
+  overflow-y: ${(props) => (props.allowOverflow ? "auto" : "scroll")};
+  height: ${(props) => (props.allowOverflow ? "auto" : "90vh")};
+`;
+
+const IntentTable = ({
+  title,
+  data,
+  showSearch,
+  perPage = 5,
+  allowOverflow = true,
+}) => {
+  let whitespaceRows = [];
+
   let rows = useMemo(() => {
     let tableData = [];
     data.data.map((x) => {
@@ -32,6 +35,7 @@ const IntentTable = ({ title, data, showSearch }) => {
             switch (typeof x[y][0]) {
               // If nested object
               case "object":
+                whitespaceRows.push(y);
                 let temp = [];
                 // Iterate over the array of objects
                 x[y].map((i) => {
@@ -39,8 +43,9 @@ const IntentTable = ({ title, data, showSearch }) => {
                     // Return `key - value` pair
                     temp.push(`${j} - ${i[j]}\n`);
                   }
+                  temp.push("\n");
                 });
-                tempObj[y] = temp.join("\n");
+                tempObj[y] = temp.slice(0, -1).join("");
                 break;
               // Just an array of strings
               case "string":
@@ -61,6 +66,26 @@ const IntentTable = ({ title, data, showSearch }) => {
     return tableData;
   });
 
+  let columns = useMemo(() => {
+    let header = [];
+    data.headings.map((x) => {
+      console.log(x);
+      header.push({
+        text: x.title,
+        dataField: x.id,
+        sort: true,
+        style: whitespaceRows.includes(x.id)
+          ? {
+              whiteSpace: "pre-wrap",
+              wordWrap: "break-word",
+              width: "25%",
+            }
+          : "",
+      });
+    });
+    return header;
+  });
+
   const defaultSorted = [
     {
       dataField: "col1",
@@ -69,8 +94,9 @@ const IntentTable = ({ title, data, showSearch }) => {
   ];
 
   const pagination = paginationFactory({
-    sizePerPage: 10,
+    sizePerPage: perPage,
     hideSizePerPage: true,
+    hidePageListOnlyOnePage: true,
     showTotal: true,
   });
 
@@ -93,7 +119,10 @@ const IntentTable = ({ title, data, showSearch }) => {
           Maximize
         </Link>
       )}
-      <div className="table-responsive">
+      <ResponsiveContainer
+        className="table-responsive"
+        allowOverflow={allowOverflow ? true : false}
+      >
         <ToolkitProvider keyField="ID" data={rows} columns={columns} search>
           {(props) => {
             return (
@@ -111,7 +140,7 @@ const IntentTable = ({ title, data, showSearch }) => {
             );
           }}
         </ToolkitProvider>
-      </div>
+      </ResponsiveContainer>
     </Fragment>
   );
 };

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 
 import ChartContainer from "./ChartContainer";
 
@@ -96,14 +96,6 @@ export default class CustomDoughNutChart extends PureComponent {
   };
 
   render() {
-    var graphData = [];
-    this.props.values.map((v) => {
-      graphData.push({
-        name: Object.keys(v)[0],
-        value: Number(Object.values(v)[0]),
-      });
-    });
-
     var graphData = [];
     this.props.values.map((v) => {
       graphData.push({

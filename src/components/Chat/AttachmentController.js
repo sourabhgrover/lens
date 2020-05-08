@@ -22,7 +22,13 @@ const AttachmentController = (props) => {
     case ATTACHMENT_TYPE_QUICKREPLY_ACTION:
       return <QuickReplyAction {...props} />;
     case ATTACHMENT_TYPE_EXCEL:
-      return <IntentTable title={props.title} data={props.value[0]} />;
+      return (
+        <IntentTable
+          title={props.title}
+          data={props.value[0]}
+          allowOverflow={false}
+        />
+      );
     case ATTACHMENT_TYPE_HERO_IMAGE:
       return <HeroImage {...props} />;
     default:
