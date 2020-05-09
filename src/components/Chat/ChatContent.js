@@ -46,6 +46,7 @@ class ChatContent extends React.Component {
   }
 
   renderAttachment(attachment) {
+    console.log(attachment);
     return attachment.map((singleAttachment, index) => {
       return <AttachmentController key={`A${index}`} {...singleAttachment} />;
     });
@@ -81,7 +82,7 @@ class ChatContent extends React.Component {
 
               {
                 // Show Bot Message
-                chatMessage.messageBy === BOT ? (
+                (chatMessage.messageBy === BOT && chatMessage.queryResult.length > 0 && chatMessage.queryResult[0] !== '') ? (
                   <BotMessage key={index} {...chatMessage} />
                 ) : (
                     ""
@@ -90,9 +91,9 @@ class ChatContent extends React.Component {
 
               {
                 // Show Bot Attachments
-                chatMessage.messageBy === BOT &&
+                (chatMessage.messageBy === BOT &&
                   typeof chatMessage.attachment !== "undefined" &&
-                  chatMessage.attachment.length > 0
+                  chatMessage.attachment.length > 0)
                   ? this.renderAttachment(chatMessage.attachment)
                   : ""
               }
