@@ -7,8 +7,14 @@ const Search = ({ onClear, onSearch }) => {
   const handleChange = () => {
     onSearch(inputRef.current.value);
   };
+
+  const handleEnterKey = (event) => {
+    // Currently enter key submits the form and causes
+    // an issue in search. So disabling it.
+    if (event.which === 13) event.preventDefault();
+  };
   return (
-    <Form>
+    <Form onKeyPress={(e) => handleEnterKey(e)}>
       <FormGroup className="d-flex w-100">
         <Input
           innerRef={inputRef}

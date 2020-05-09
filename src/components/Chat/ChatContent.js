@@ -14,7 +14,7 @@ import AttachmentController from "./AttachmentController";
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
-  padding-bottom: ${(props) => (props.qrActive ? "275px" : "0px")};
+  padding-bottom: ${(props) => (props.qrActive ? "225px" : "0px")};
 `;
 
 class ChatContent extends React.Component {
