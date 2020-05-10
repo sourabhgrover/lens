@@ -42,7 +42,7 @@ const ChatInputContainer = (props) => {
       {props.displayQuickReplies ? (
         <QuickReplyContainer>
           {props.value.map((item, i) => (
-            <ImageQuickReplyItem color="blue" key={i} {...item} />
+            <ImageQuickReplyItem color="blue" size="100px" key={i} {...item} />
           ))}
         </QuickReplyContainer>
       ) : null}
@@ -56,7 +56,6 @@ ChatInputContainer.defaultProps = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.quickReply);
   const { quickReply } = state;
   return {
     displayQuickReplies: quickReply.displayQuickReply,

@@ -114,7 +114,7 @@ const ChatHeader = () => {
               />
             ) : (
               <NavButton
-                text="Summary Details"
+                text="Analysis Overview"
                 icon={<FaClipboardList />}
                 color="#A1373F"
                 size="0.875rem"

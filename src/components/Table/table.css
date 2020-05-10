@@ -1,12 +1,40 @@
+tr,
+.table th,
+.table thead th,
+.table td {
+  border: none;
+}
+
 .thead-style {
-  background-color: #462a50;
-  color: #fff;
+  background-color: #9FDCFF;
+  color: #212529;
   text-align: center;
 }
 
 .tbody-style {
-  background-color: #4f355a;
-  color: #fff;
+  color: #212529;
+}
+
+.tbody-style td {
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+}
+
+.tbody-style td:first-child {
+  border-left: none;
+}
+
+.tbody-style td:last-child {
+  border-right: none;
+}
+
+.tbody-style tr:nth-child(odd) {
+  background-color: #CDEDFF;
+}
+
+.tbody-style tr:nth-child(even) {
+  background-color: #9FDCFF;
+
 }
 
 .form-control:focus,

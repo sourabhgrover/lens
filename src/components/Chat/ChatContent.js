@@ -14,7 +14,7 @@ import AttachmentController from "./AttachmentController";
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
-  padding-bottom: ${(props) => (props.qrActive ? "225px" : "0px")};
+  padding-bottom: ${(props) => (props.ReplyActive ? "225px" : "0px")};
 `;
 
 class ChatContent extends React.Component {
@@ -69,7 +69,7 @@ class ChatContent extends React.Component {
       <Main
         fluid
         className="px-2 px-md-3 px-lg-5"
-        qrActive={this.props.isQuickReplyActive ? true : false}
+        ReplyActive={this.props.isQuickReplyActive ? true : false}
       >
         {this.props.chat.map((chatMessage, index) => {
           // Check if message need to be displayed on Bot Screen

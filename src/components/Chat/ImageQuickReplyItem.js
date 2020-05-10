@@ -5,11 +5,12 @@ import { sendUserMessage } from "../../redux/actions/chatAction";
 import Color from "color";
 
 import { IMG_SRC_URL, IMG_SRC_FILE } from "../../utils/const";
+import { HIDE_QR_CARDS } from "../../redux/actions/type";
 
 const ImgPath = "/img/";
-const Box = styled.div`
-  height: 150px;
-  min-width: 150px;
+const Box = styled(({ color, size, ...rest }) => <div {...rest} />)`
+  height: ${(props) => props.size};
+  min-width: ${(props) => props.size};
   margin: 1rem;
   background-color: #fff;
   color: ${(props) => props.color};
@@ -49,14 +50,17 @@ const ImageQuickReplyItem = ({
   data: messageFromBot,
   messageToBot,
   color,
+  size = "125px",
 }) => {
-  let size = 125;
   const dispatch = useDispatch();
   return (
     <Box
       color={color}
       size={size}
-      onClick={() => dispatch(sendUserMessage(messageToBot))}
+      onClick={() => {
+        dispatch(sendUserMessage(messageToBot));
+        dispatch({ type: HIDE_QR_CARDS });
+      }}
     >
       <span>
         {imageSource === IMG_SRC_URL ? (
