@@ -1,13 +1,9 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 import ChatHeader from "./ChatHeader";
-import ChatInputContainer from "./ChatInputContainer";
 import ChatContent from "./ChatContent";
-import Footer from "../Footer";
 import TextBar from "../Summary/TextBar";
-
-
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -20,16 +16,15 @@ const Wrapper = styled.div`
 `;
 
 class Chat extends React.Component {
-    render() {
-        return (
-            <Wrapper>
-                <ChatHeader />
-                <ChatContent />
-                <TextBar />
-            </Wrapper>
-
-        );
-    }
+  render() {
+    return (
+      <Wrapper>
+        <ChatHeader />
+        <ChatContent history={this.props.location.state} />
+        <TextBar history={this.props.location.state} />
+      </Wrapper>
+    );
+  }
 }
 
 export default Chat;

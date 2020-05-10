@@ -59,7 +59,7 @@ const Toggler = styled.button`
 
 const ChatHeader = () => {
   const history = useHistory();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -82,25 +82,35 @@ const ChatHeader = () => {
       </Toggler>
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          {location.pathname === "/table" ? (
+          {pathname === "/table" ? (
             <NavItem className="mx-2">
               <NavButton
                 text="Home"
                 icon={<FaHome />}
                 color="#A1373F"
                 size="0.875rem"
-                onClick={() => history.push("/chat")}
+                onClick={() =>
+                  history.push({
+                    pathname: "/chat",
+                    state: { scrollToBottom: true },
+                  })
+                }
               />
             </NavItem>
           ) : null}
           <NavItem className="mx-2">
-            {location.pathname === "/summary" ? (
+            {pathname === "/summary" ? (
               <NavButton
                 text="Home"
                 icon={<FaHome />}
                 color="#A1373F"
                 size="0.875rem"
-                onClick={() => history.push("/chat")}
+                onClick={() =>
+                  history.push({
+                    pathname: "/chat",
+                    state: { scrollToBottom: true },
+                  })
+                }
               />
             ) : (
               <NavButton

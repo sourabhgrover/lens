@@ -13,6 +13,17 @@ const Wrapper = styled.div`
 `;
 
 const CarouselContainer = ({ children, variable = false, type }) => {
+  let typeSet = 4;
+  switch (type) {
+    case "hero":
+      typeSet = 3;
+      break;
+    case "qr-image":
+      typeSet = 5;
+      break;
+    default:
+      break;
+  }
   return (
     <Wrapper>
       <Slider
@@ -23,19 +34,19 @@ const CarouselContainer = ({ children, variable = false, type }) => {
           {
             breakpoint: 992,
             settings: {
-              slidesToShow: type === "hero" ? 3 : 4,
+              slidesToShow: typeSet - 1,
             },
           },
           {
             breakpoint: 768,
             settings: {
-              slidesToShow: type === "hero" ? 2 : 3,
+              slidesToShow: typeSet - 2,
             },
           },
           {
             breakpoint: 576,
             settings: {
-              slidesToShow: type === "hero" ? 1 : 2,
+              slidesToShow: typeSet - 3 === 0 ? typeSet - 3 : 1,
             },
           },
           {
@@ -45,7 +56,7 @@ const CarouselContainer = ({ children, variable = false, type }) => {
             },
           },
         ]}
-        slidesToShow={type === "hero" ? 3 : 5}
+        slidesToShow={typeSet}
         swipeToSlide={true}
         variableWidth={variable}
         nextArrow={<FaAngleDoubleRight />}
