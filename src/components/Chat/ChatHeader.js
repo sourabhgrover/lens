@@ -63,6 +63,7 @@ const ChatHeader = () => {
   const dispatch = useDispatch();
 
   const signOut = () => {
+    sessionStorage.removeItem('datasetId');
     dispatch(deleteChat());
     history.push("/");
   };
@@ -113,14 +114,14 @@ const ChatHeader = () => {
                 }
               />
             ) : (
-              <NavButton
-                text="Summary Details"
-                icon={<FaClipboardList />}
-                color="#A1373F"
-                size="0.875rem"
-                onClick={() => history.push("/summary")}
-              />
-            )}
+                <NavButton
+                  text="Summary Details"
+                  icon={<FaClipboardList />}
+                  color="#A1373F"
+                  size="0.875rem"
+                  onClick={() => history.push("/summary")}
+                />
+              )}
           </NavItem>
           <NavItem className="mx-2">
             <NavButton
