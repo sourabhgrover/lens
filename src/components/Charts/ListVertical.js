@@ -10,11 +10,6 @@ const GridContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  margin-top: 2.75rem;
-
-  @media (max-width: 1200px) {
-    margin-top: 0;
-  }
 
   @media (max-width: 576px) {
     flex-direction: column;

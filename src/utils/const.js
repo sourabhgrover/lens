@@ -1,7 +1,7 @@
 export const DOUGHNUT_CHART = "doughnut_chart";
 export const VERTICAL_BAR_CHART = "bargraph_vertical";
 export const HORIZONTAL_BAR_CHART = "bargraph_horizontal";
-export const LINE_CHART = "list_vertical";
+export const LINE_CHART = "Key Phrases Count";
 
 export const ATTACHMENT_TYPE_HERO_IMAGE = "carousal";
 export const ATTACHMENT_TYPE_QUICKREPLY_TEXT = "quickReplytext";
