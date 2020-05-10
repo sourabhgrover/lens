@@ -53,7 +53,6 @@ class ChatContent extends React.Component {
   // }
 
   renderAttachment(attachment) {
-    console.log(attachment);
     return attachment.map((singleAttachment, index) => {
       return <AttachmentController key={`A${index}`} {...singleAttachment} />;
     });
