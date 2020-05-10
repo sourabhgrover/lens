@@ -2,20 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { sendUserMessage } from "../../redux/actions/chatAction";
-import Color from "color";
 
 import { IMG_SRC_URL, IMG_SRC_FILE } from "../../utils/const";
 import { HIDE_QR_CARDS } from "../../redux/actions/type";
 
 const ImgPath = "/img/";
-const Box = styled(({ color, size, ...rest }) => <div {...rest} />)`
+
+const Box = styled(({ size, ...rest }) => <div {...rest} />)`
   height: ${(props) => props.size};
-  min-width: ${(props) => props.size};
+  width: ${(props) => props.size};
   margin: 1rem;
   background-color: #fff;
-  color: ${(props) => props.color};
-  box-shadow: 0 0 5px 2px
-    ${(props) => Color(props.color).darken(0.1).alpha(0.5)};
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -23,11 +20,31 @@ const Box = styled(({ color, size, ...rest }) => <div {...rest} />)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:nth-child(1) {
+    color: #00ee5f;
+    box-shadow: 0 0 5px 2px #e3f2e9;
+  }
+  &:nth-child(2) {
+    color: #0035ef;
+    box-shadow: 0 0 5px 2px #d2dcff;
+  }
+  &:nth-child(3) {
+    color: #edbc00;
+    box-shadow: 0 0 5px 2px #fbedb7;
+  }
+  &:nth-child(4) {
+    color: #5c6bce;
+    box-shadow: 0 0 5px 2px #bfc8ff;
+  }
+  &:nth-child(5) {
+    color: #ef2000;
+    box-shadow: 0 0 5px 2px #ffd9d3;
+  }
 `;
 
 const Img = styled.img`
   display: block;
-  width: 75px;
+  width: 50px;
   margin: 0 auto;
   align-self: center;
   @media (max-width: 768px) {

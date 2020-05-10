@@ -21,7 +21,7 @@ const NavbarStyled = styled(Navbar)`
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: rgb(249, 201, 0);
+  background-color: #f9c900;
   z-index: 999;
 `;
 
@@ -71,7 +71,7 @@ const ChatHeader = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <NavbarStyled expand="md" className="px-4 px-md-3 py-1">
-      <LogoContainer href="#" onClick={() => history.push("/chat")}>
+      <LogoContainer onClick={() => history.push("/chat")}>
         <LogoImage src={LogoImg} alt="Lens!" />
         <LogoText className="text-white">Lens!</LogoText>
       </LogoContainer>

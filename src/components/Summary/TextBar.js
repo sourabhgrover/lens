@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import KeyboardMicButton from "./KeyboardMicButton";
 import ChatInputContainer from "../Chat/ChatInputContainer";
 
-const TextBar = ({ history }) => {
+const TextBar = ({ history, isOpen, toggler }) => {
   const [inputType, setInputType] = useState(0);
 
   // If returning back from table, set input type back to text
@@ -22,7 +22,11 @@ const TextBar = ({ history }) => {
       {inputType === 0 ? (
         <KeyboardMicButton onClick={() => setInputType(1)} />
       ) : (
-        <ChatInputContainer onDoubleClick={handleDoubleClick} />
+        <ChatInputContainer
+          isOpen={isOpen}
+          toggler={toggler}
+          onDoubleClick={handleDoubleClick}
+        />
       )}
     </div>
   );

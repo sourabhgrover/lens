@@ -29,16 +29,14 @@ const Text = styled.p`
 
 const TextQuickReplyItem = ({ data, messageToBot }) => {
   const dispatch = useDispatch();
-  const onSubmit = () => {
-    console.log("comes here");
-    console.log(messageToBot);
+  const sendMessage = () => {
     dispatch(sendUserMessage(messageToBot));
     // this.props.sendUserMessage(this.state.userEnteredMessage);
     // this.setState({ userEnteredMessage: '' });
   };
   return (
     <Container>
-      <Text onClick={onSubmit}>{data}</Text>
+      <Text onClick={sendMessage}>{data}</Text>
     </Container>
   );
 };

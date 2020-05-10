@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 10rem;
+  width: 8rem;
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 2rem;
@@ -30,11 +30,10 @@ const ButtonContainer = styled.div`
 `;
 
 const KeyboardMicButton = (props) => {
-
   return (
     <Wrapper>
       <ButtonContainer onClick={props.onClick}>
-        <IconContext.Provider value={{ color: "#3a3a3a", size: "32px" }}>
+        <IconContext.Provider value={{ color: "#3a3a3a", size: "24px" }}>
           <span>
             <FaRegKeyboard />
           </span>

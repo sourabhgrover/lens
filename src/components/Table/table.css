@@ -1,3 +1,7 @@
+.table-responsive {
+  padding-top: 1rem;
+}
+
 tr,
 .table th,
 .table thead th,
@@ -47,8 +51,14 @@ tr,
   color: #fff;
 }
 
+.page-item .page-link {
+  border: 1px solid #212529;
+}
+
 .page-item.active .page-link {
-  transform: scale(1.05);
+  border-width: 2px;
+  color: #212529;
+  transform: scale(1.1);
 }
 
 .react-bootstrap-table-pagination-list {
@@ -59,21 +69,12 @@ tr,
 .react-bootstrap-table-page-btns-ul {
   float: right;
   margin-top: 0px !important;
-}
-
-@media only screen and (max-width: 768px) {
-  .react-bootstrap-table-page-btns-ul {
-    float: none;
-  }
-
-  .react-bootstrap-table-pagination-list {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
+  margin-right: 1rem;
 }
 
 .react-bootstrap-table-page-btns-ul .page-link {
-  background-color: #462a50 !important;
+  background-color: #CDEDFF !important;
+  color: #212529;
   padding: 0.5rem 1rem !important;
 }
 

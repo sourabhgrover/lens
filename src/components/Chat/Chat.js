@@ -16,12 +16,31 @@ const Wrapper = styled.div`
 `;
 
 class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      replyContainerIsOpen: true,
+    };
+  }
+
+  toggler = () => {
+    this.setState({
+      replyContainerIsOpen: !this.state.replyContainerIsOpen,
+    });
+  };
   render() {
     return (
       <Wrapper>
         <ChatHeader />
-        <ChatContent history={this.props.location.state} />
-        <TextBar history={this.props.location.state} />
+        <ChatContent
+          isOpen={this.state.replyContainerIsOpen}
+          history={this.props.location.state}
+        />
+        <TextBar
+          isOpen={this.state.replyContainerIsOpen}
+          toggler={this.toggler}
+          history={this.props.location.state}
+        />
       </Wrapper>
     );
   }

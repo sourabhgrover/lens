@@ -104,8 +104,10 @@ const IntentTable = ({
     sizePerPage: perPage,
     hideSizePerPage: true,
     hidePageListOnlyOnePage: true,
+    firstPageText: "First",
     prePageText: "Back",
     nextPageText: "Next",
+    lastPageText: "Last",
     showTotal: true,
     totalSize: rows.length,
   };

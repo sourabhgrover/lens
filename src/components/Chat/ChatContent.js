@@ -14,7 +14,12 @@ import AttachmentController from "./AttachmentController";
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
-  padding-bottom: ${(props) => (props.ReplyActive ? "225px" : "0px")};
+  padding-bottom: ${(props) =>
+    props.ReplyActive && props.isOpen
+      ? props.isText
+        ? "110px"
+        : "185px"
+      : "0px"};
 `;
 
 class ChatContent extends React.Component {
@@ -53,7 +58,6 @@ class ChatContent extends React.Component {
   // }
 
   renderAttachment(attachment) {
-    console.log(attachment);
     return attachment.map((singleAttachment, index) => {
       return <AttachmentController key={`A${index}`} {...singleAttachment} />;
     });
@@ -70,7 +74,9 @@ class ChatContent extends React.Component {
       <Main
         fluid
         className="px-2 px-md-3 px-lg-5"
-        ReplyActive={this.props.isQuickReplyActive ? true : false}
+        ReplyActive={this.props.isQuickReplyActive}
+        isOpen={this.props.isOpen}
+        isText={this.props.quickReplyType === "quickReplytext"}
       >
         {this.props.chat.map((chatMessage, index) => {
           // Check if message need to be displayed on Bot Screen
@@ -120,10 +126,12 @@ class ChatContent extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { chat, table, quickReply } = state;
   return {
-    chat: state.chat,
-    table: state.table,
-    isQuickReplyActive: state.quickReply.displayQuickReply,
+    chat,
+    table,
+    isQuickReplyActive: quickReply.displayQuickReply,
+    quickReplyType: quickReply.type,
   };
 };
 
