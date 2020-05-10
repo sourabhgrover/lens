@@ -1,8 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Collapse } from "reactstrap";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+
 import ChatInput from "./ChatInput";
-import ImageQuickReplyItem from "./ImageQuickReplyItem";
+import InlineController from "./InlineController";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -16,9 +19,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const QuickReplyContainer = styled.div`
+const QuickReplyContainer = styled(Collapse)`
   scroll-snap-type: x mandatory;
   overflow-x: auto;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   &:after {
@@ -27,41 +31,46 @@ const QuickReplyContainer = styled.div`
   }
   & > div {
     scroll-snap-align: center;
-    @media (max-width: 992px) {
-      width: 150px;
-    }
   }
   @media (max-width: 992px) {
     justify-content: flex-start;
   }
 `;
 
+const Toggler = styled.span`
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+`;
+
 const ChatInputContainer = (props) => {
+  const { isOpen, toggler } = props;
   return (
     <Wrapper>
-      {props.displayQuickReplies ? (
-        <QuickReplyContainer>
-          {props.value.map((item, i) => (
-            <ImageQuickReplyItem color="blue" key={i} {...item} />
-          ))}
-        </QuickReplyContainer>
+      {props.displayQuickReply ? (
+        <>
+          <QuickReplyContainer isOpen={isOpen}>
+            <InlineController type={props.type} data={props.value} />
+          </QuickReplyContainer>
+          <Toggler onClick={() => toggler()}>
+            {isOpen ? <FaChevronDown /> : <FaChevronUp />}
+          </Toggler>
+        </>
       ) : null}
       <ChatInput onDoubleClick={props.onDoubleClick} />
     </Wrapper>
   );
 };
 
-ChatInputContainer.defaultProps = {
-  displayQuickReplies: false,
-};
+// ChatInputContainer.defaultProps = {
+//   displayQuickReply: false,
+// };
 
 const mapStateToProps = (state) => {
-  console.log(state.quickReply);
-  const { quickReply } = state;
-  return {
-    displayQuickReplies: quickReply.displayQuickReply,
-    value: quickReply.value,
-  };
+  return state.quickReply;
 };
 
 export default connect(mapStateToProps, null)(ChatInputContainer);

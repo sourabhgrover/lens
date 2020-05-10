@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Color from "color";
 
 const Box = styled.div`
-  height: 150px;
-  min-width: 150px;
+  height: ${(props) => props.size};
+  width: ${(props) => props.size};
   margin: 1rem;
   background-color: #fff;
   color: ${(props) => props.color};
-  box-shadow: 0 0 5px 2px
-    ${(props) => Color(props.color).darken(0.1).alpha(0.5)};
+  box-shadow: 0 0 3px 1px ${(props) => props.color};
   padding: 20px;
   border-radius: 10px;
   display: flex;
@@ -22,12 +20,9 @@ const Box = styled.div`
 
 const Img = styled.img`
   display: block;
-  width: 60px;
+  width: 50px;
   margin: 0 auto;
   align-self: center;
-  @media (max-width: 576px) {
-    width: 50px;
-  }
 `;
 
 const Text = styled.span`
@@ -55,6 +50,7 @@ QuickReply.propTypes = {
 
 QuickReply.defaultProps = {
   color: "#407294",
+  size: "125px",
 };
 
 export default QuickReply;

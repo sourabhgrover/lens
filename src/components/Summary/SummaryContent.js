@@ -17,6 +17,7 @@ import {
 import VerticalBarChart from "../Charts/VerticalBarChart";
 import HorizontalBarChart from "../Charts/HorizontalBarChart";
 import CustomDoughNutChart from "../Charts/CustomDoughNutChart";
+import ListVertical from "../Charts/ListVertical";
 import SummaryContentHeader from "./SummaryContentHeader";
 import "./summary.css";
 
@@ -33,7 +34,6 @@ const SummaryContent = () => {
       dispatch(clearSummary());
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
 
   const summaryData = useSelector((state) => state.summary);
 
@@ -64,7 +64,11 @@ const SummaryContent = () => {
             </Col>
           );
         case LINE_CHART:
-          return null;
+          return (
+            <Col lg={12} xl={6} className="d-flex" key={i}>
+              <ListVertical {...singleChart} />
+            </Col>
+          );
         default:
           return null;
       }

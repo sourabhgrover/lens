@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
+import { hideQuickReply } from "../../redux/actions/quickReplyAction";
 import { FIRST_MESSAGE } from "../../utils/const";
 
 const ButtonColor = `#393939`;
@@ -79,7 +80,6 @@ class ChatInput extends React.Component {
   componentDidMount() {
     // Check the `recognition` variable and set support accordingly.
     if (recognition === null) {
-      console.log(recognition);
       this.setState({ supported: false });
     } else {
       this.setState({ supported: true });
@@ -130,6 +130,7 @@ class ChatInput extends React.Component {
   resetChat = () => {
     this.props.deleteChat();
     this.props.sendUserMessage(FIRST_MESSAGE);
+    this.props.hideQuickReply();
   };
   // Send Message on submit
   onSubmit = () => {
@@ -157,7 +158,9 @@ class ChatInput extends React.Component {
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend" onClick={this.resetChat}>
             <ResetButton>
-              <IconContext.Provider value={{ color: ButtonColor }}>
+              <IconContext.Provider
+                value={{ color: ButtonColor, size: "14px" }}
+              >
                 <FaRedo />
               </IconContext.Provider>
             </ResetButton>
@@ -198,5 +201,5 @@ class ChatInput extends React.Component {
 }
 
 export default withRouter(
-  connect(null, { sendUserMessage, deleteChat })(ChatInput)
+  connect(null, { sendUserMessage, deleteChat, hideQuickReply })(ChatInput)
 );

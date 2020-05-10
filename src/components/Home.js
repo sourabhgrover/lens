@@ -42,10 +42,27 @@ const Element1 = styled(BaseElement)`
   left: 0;
 `;
 const Element2 = styled(BaseElement)`
-  background: url(${Item2}) right bottom no-repeat;
-  background-size: 25%;
+  background: url(${Item2}) no-repeat,
+    url("https://image.flaticon.com/icons/png/512/39/39237.png") no-repeat;
+  background-position: right bottom, 75% 95%;
+  background-size: 20%, 10%;
   bottom: 0;
   right: 0;
+  @media (max-width: 992px) {
+    background-size: 23%, 15%;
+    background-position: right bottom, 70% bottom;
+  }
+  @media (max-width: 768px) {
+    background-size: 25%, 17.5%;
+    background-position: right bottom, 65% bottom;
+  }
+  @media (max-width: 576px) {
+    background-size: 30%, 20%;
+    background-position: right bottom, 60% bottom;
+  }
+  @media (max-width: 420px) {
+    background-position: right bottom, center calc(100% - 0.875rem);
+  }
 `;
 const Element3 = styled(BaseElement)`
   background: url(${Item3}) left top no-repeat;
@@ -62,7 +79,7 @@ const Element4 = styled(BaseElement)`
   right: 5rem;
   @media (max-width: 576px) {
     right: 0rem;
-    background-size: 40%;
+    background-size: 30%;
   }
 `;
 
@@ -72,6 +89,9 @@ const Logo = styled.div`
 `;
 const LogoImage = styled.img`
   width: 100px;
+  @media (max-width: 576px) {
+    width: 75px;
+  }
 `;
 
 const LogoText = styled.p`
@@ -79,6 +99,9 @@ const LogoText = styled.p`
   margin-top: 0.75rem;
   margin-left: 1rem;
   font-size: 4rem;
+  @media (max-width: 576px) {
+    font-size: 3rem;
+  }
 `;
 
 const Home = () => {
@@ -100,10 +123,10 @@ const Home = () => {
           <LogoImage src={LogoImg} alt="Lens" />
           <LogoText>Lens!</LogoText>
         </Logo>
-        <h4 className="mt-4 text-uppercase">
+        <h4 className="mt-4 text-center text-uppercase">
           Natural Language Interpreting Solution
         </h4>
-        <p>
+        <p className="text-center">
           Lens runs on multi brain architecture making it a highly customizable
           solution for enterprise developers to easily solve problems around
           text understanding. You can use Lens as a Virtual Product Manager, a
@@ -115,7 +138,7 @@ const Home = () => {
           icon={<FaGoogle />}
           text="Login with Google"
           color="#A1373F"
-          className="align-self-center align-self-md-start"
+          className="align-self-center"
           onClick={() => {
             history.push("/chat");
           }}
