@@ -7,9 +7,23 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  Cell
 } from "recharts";
 
 import ChartContainer from "./ChartContainer";
+
+const COLORS = [
+  "#765D69",
+  "#FFBB28",
+  "#FF8042",
+  "#5E86A2",
+  "#00D6AE",
+  "#1C4C67",
+  "#8DCFC6",
+  "#FDFBD4",
+  "#F2828D",
+  "#0088",
+];
 
 export default class VerticalBarChart extends PureComponent {
   render() {
@@ -17,7 +31,7 @@ export default class VerticalBarChart extends PureComponent {
     this.props.values.map((v) => {
       graphData.push({
         name: Object.keys(v)[0],
-        value: Number(Object.values(v)[0]),
+        'Intent Categories': Number(Object.values(v)[0]),
       });
     });
     return (
@@ -39,7 +53,11 @@ export default class VerticalBarChart extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="value" fill="#8884d8" />
+              <Bar dataKey="Intent Categories" >
+                {graphData.map((entry, index) => (
+                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </ChartContainer>

@@ -7,17 +7,30 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  Cell
 } from "recharts";
 
 import ChartContainer from "./ChartContainer";
 
+const COLORS = [
+  "#765D69",
+  "#FFBB28",
+  "#FF8042",
+  "#5E86A2",
+  "#00D6AE",
+  "#1C4C67",
+  "#8DCFC6",
+  "#FDFBD4",
+  "#F2828D",
+  "#0088",
+];
 export default class HorizontalBarChart extends PureComponent {
   render() {
     var graphData = [];
     this.props.values.map((v) => {
       graphData.push({
         name: Object.keys(v)[0],
-        value: Number(Object.values(v)[0]),
+        'Persona Categories': Number(Object.values(v)[0]),
       });
     });
     return (
@@ -40,7 +53,11 @@ export default class HorizontalBarChart extends PureComponent {
             <Tooltip />
             <Legend />
 
-            <Bar dataKey="value" barSize={20} fill="#FFBB28" />
+            <Bar dataKey="Persona Categories" barSize={20}  >
+              {graphData.map((entry, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Bar>
           </ComposedChart>
         </ResponsiveContainer>
       </ChartContainer>

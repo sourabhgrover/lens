@@ -11,7 +11,6 @@ const instance = axios.create({
 instance.interceptors.request.use(function (config) {
 
     let datasetId = sessionStorage.getItem('datasetId');
-    console.log(datasetId);
     if (datasetId !== null) {
         config.data.datasetId = datasetId;
     } else {

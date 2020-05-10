@@ -30,6 +30,8 @@ const Content = styled.div`
   margin: 1rem;
 `;
 
+
+
 const ChartContainer = (props) => {
   return (
     <Card>

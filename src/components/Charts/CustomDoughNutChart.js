@@ -4,12 +4,16 @@ import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import ChartContainer from "./ChartContainer";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
+  "#765D69",
   "#FFBB28",
   "#FF8042",
-  "#FFBB28",
-  "#FF8042",
+  "#5E86A2",
+  "#00D6AE",
+  "#1C4C67",
+  "#8DCFC6",
+  "#FDFBD4",
+  "#F2828D",
+  "#0088",
 ];
 const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
@@ -70,7 +74,8 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`PV ${value}`}</text>
+
+      >{`${value} Tones`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -78,7 +83,6 @@ const renderActiveShape = (props) => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
       </text>
     </g>
   );
