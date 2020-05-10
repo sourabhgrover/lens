@@ -14,6 +14,7 @@ import AttachmentController from "./AttachmentController";
 const Main = styled(Container)`
   margin: 5rem 0;
   flex-grow: 1;
+  padding-bottom: ${(props) => (props.qrActive ? "275px" : "0px")};
 `;
 
 class ChatContent extends React.Component {
@@ -22,8 +23,11 @@ class ChatContent extends React.Component {
     this.ref = React.createRef();
   }
 
-  scrollToBottom = () => {
-    this.ref.current.scrollIntoView({ behavior: "smooth" });
+  scrollToBottom = (direct = false) => {
+    // passing direct to this forces scrolling instantly, instead of animating.
+    if (this.ref.current?.scrollIntoView) {
+      this.ref.current.scrollIntoView({ behavior: direct ? "auto" : "smooth" });
+    }
   };
 
   componentDidUpdate = () => {
@@ -39,11 +43,14 @@ class ChatContent extends React.Component {
     if (this.props.chat.length) {
       this.scrollToBottom();
     }
+    if (this.props.history?.scrollToBottom) {
+      this.scrollToBottom(true);
+    }
   }
 
-  componentWillUnmount() {
-    // this.props.deleteChat();
-  }
+  // componentWillUnmount() {
+  // this.props.deleteChat();
+  // }
 
   renderAttachment(attachment) {
     return attachment.map((singleAttachment, index) => {
@@ -59,7 +66,11 @@ class ChatContent extends React.Component {
       );
     }
     return (
-      <Main fluid className="px-2 px-md-3 px-lg-5">
+      <Main
+        fluid
+        className="px-2 px-md-3 px-lg-5"
+        qrActive={this.props.isQuickReplyActive ? true : false}
+      >
         {this.props.chat.map((chatMessage, index) => {
           // Check if message need to be displayed on Bot Screen
           if (chatMessage.toDisplayMsg === 0) {
@@ -75,8 +86,8 @@ class ChatContent extends React.Component {
                     userMessage={chatMessage.userMessage}
                   />
                 ) : (
-                    ""
-                  )
+                  ""
+                )
               }
 
               {
@@ -84,15 +95,15 @@ class ChatContent extends React.Component {
                 chatMessage.messageBy === BOT ? (
                   <BotMessage key={index} {...chatMessage} />
                 ) : (
-                    ""
-                  )
+                  ""
+                )
               }
 
               {
                 // Show Bot Attachments
                 chatMessage.messageBy === BOT &&
-                  typeof chatMessage.attachment !== "undefined" &&
-                  chatMessage.attachment.length > 0
+                typeof chatMessage.attachment !== "undefined" &&
+                chatMessage.attachment.length > 0
                   ? this.renderAttachment(chatMessage.attachment)
                   : ""
               }
@@ -109,6 +120,7 @@ const mapStateToProps = (state) => {
   return {
     chat: state.chat,
     table: state.table,
+    isQuickReplyActive: state.quickReply.displayQuickReply,
   };
 };
 

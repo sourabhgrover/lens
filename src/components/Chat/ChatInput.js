@@ -9,7 +9,7 @@ import {
   FaAssistiveListeningSystems,
 } from "react-icons/fa";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
 import { FIRST_MESSAGE } from "../../utils/const";
@@ -73,6 +73,7 @@ class ChatInput extends React.Component {
     super(props);
     // Intialize state
     this.state = { userEnteredMessage: "", listening: false, supported: false };
+    this.inputRef = React.createRef(null);
   }
 
   componentDidMount() {
@@ -83,6 +84,7 @@ class ChatInput extends React.Component {
     } else {
       this.setState({ supported: true });
     }
+    this.inputRef.current.focus();
   }
 
   handleListen = () => {
@@ -145,7 +147,7 @@ class ChatInput extends React.Component {
   callSendMessageAction() {
     this.props.sendUserMessage(this.state.userEnteredMessage);
     this.setState({ userEnteredMessage: "" });
-    if (this.props.location.pathname === '/summary') {
+    if (this.props.location.pathname === "/summary") {
       this.props.history.push("/chat");
     }
   }
@@ -168,6 +170,8 @@ class ChatInput extends React.Component {
             }
             placeholder="Type here... "
             onKeyDown={this._handleKeyDown}
+            onDoubleClick={this.props.onDoubleClick}
+            innerRef={this.inputRef}
           />
           <InputGroupAddon addonType="append">
             <SendButton onClick={this.onSubmit}>
@@ -182,8 +186,8 @@ class ChatInput extends React.Component {
                 {this.state.listening ? (
                   <FaAssistiveListeningSystems />
                 ) : (
-                    <FaMicrophoneAlt />
-                  )}
+                  <FaMicrophoneAlt />
+                )}
               </IconContext.Provider>
             </SpeakButton>
           </InputGroupAddon>
@@ -193,4 +197,6 @@ class ChatInput extends React.Component {
   }
 }
 
-export default withRouter(connect(null, { sendUserMessage, deleteChat })(ChatInput));
+export default withRouter(
+  connect(null, { sendUserMessage, deleteChat })(ChatInput)
+);

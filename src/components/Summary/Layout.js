@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  margin-top: 51.6px;
   & > * {
     flex-shrink: 0;
   }
@@ -24,7 +25,7 @@ const Layout = ({ children }) => {
     <Wrapper>
       <Header />
       <Container>{children}</Container>
-      {/* <Footer /> */}
+      <Footer />
     </Wrapper>
   );
 };

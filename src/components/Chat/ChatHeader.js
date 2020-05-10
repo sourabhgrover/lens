@@ -9,7 +9,7 @@ import {
   FaSignOutAlt,
   FaChevronDown,
   FaChevronUp,
-  FaHome
+  FaHome,
 } from "react-icons/fa";
 
 import { deleteChat } from "../../redux/actions/chatAction";
@@ -58,15 +58,14 @@ const Toggler = styled.button`
 `;
 
 const ChatHeader = () => {
-
   const history = useHistory();
-  const location = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
 
   const signOut = () => {
     dispatch(deleteChat());
     history.push("/");
-  }
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -83,23 +82,45 @@ const ChatHeader = () => {
       </Toggler>
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          <NavItem className="mx-2">
-            {
-              (location.pathname === '/summary') ? <NavButton
+          {pathname === "/table" ? (
+            <NavItem className="mx-2">
+              <NavButton
                 text="Home"
                 icon={<FaHome />}
                 color="#A1373F"
                 size="0.875rem"
-                onClick={() => history.push("/chat")}
-              /> : <NavButton
-                  text="Summary Details"
-                  icon={<FaClipboardList />}
-                  color="#A1373F"
-                  size="0.875rem"
-                  onClick={() => history.push("/summary")}
-                />
-            }
-
+                onClick={() =>
+                  history.push({
+                    pathname: "/chat",
+                    state: { scrollToBottom: true },
+                  })
+                }
+              />
+            </NavItem>
+          ) : null}
+          <NavItem className="mx-2">
+            {pathname === "/summary" ? (
+              <NavButton
+                text="Home"
+                icon={<FaHome />}
+                color="#A1373F"
+                size="0.875rem"
+                onClick={() =>
+                  history.push({
+                    pathname: "/chat",
+                    state: { scrollToBottom: true },
+                  })
+                }
+              />
+            ) : (
+              <NavButton
+                text="Summary Details"
+                icon={<FaClipboardList />}
+                color="#A1373F"
+                size="0.875rem"
+                onClick={() => history.push("/summary")}
+              />
+            )}
           </NavItem>
           <NavItem className="mx-2">
             <NavButton

@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 import SummaryContent from "./SummaryContent";
 import ChatHeader from "../Chat/ChatHeader";
-
-
-import SummaryFooter from "./SummaryFooter"
+import TextBar from "./TextBar";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -22,9 +20,8 @@ const Summary = () => {
     <Wrapper>
       <ChatHeader />
       <SummaryContent />
-      <SummaryFooter />
+      <TextBar />
     </Wrapper>
-
   );
 };
 
