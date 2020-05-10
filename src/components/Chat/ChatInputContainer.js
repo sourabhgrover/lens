@@ -27,9 +27,6 @@ const QuickReplyContainer = styled.div`
   }
   & > div {
     scroll-snap-align: center;
-    @media (max-width: 992px) {
-      width: 150px;
-    }
   }
   @media (max-width: 992px) {
     justify-content: flex-start;
