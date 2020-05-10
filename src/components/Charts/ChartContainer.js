@@ -1,11 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const Card = styled.div`
+const Card = styled(({ borderColor, backgroundColor, ...rest }) => (
+  <div {...rest} />
+))`
   width: 100%;
   margin: 1rem 0rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.25);
+  background-color: ${(props) => props.backgroundColor};
+  box-shadow: 0 0.125rem 0.25rem ${(props) => props.borderColor};
   @media (max-width: 768px) {
     margin: 1rem 0;
   }
@@ -32,12 +36,27 @@ const Content = styled.div`
 
 const ChartContainer = (props) => {
   return (
-    <Card>
+    <Card
+      backgroundColor={props.backgroundColor}
+      borderColor={props.borderColor}
+    >
       <Title>{props.title}</Title>
       <Separtor />
       <Content>{props.children}</Content>
     </Card>
   );
+};
+
+ChartContainer.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  borderColor: PropTypes.string,
+  backgroundColor: PropTypes.string,
+};
+
+ChartContainer.defaultProps = {
+  borderColor: "rgba(0, 0, 0, 0.25)",
+  backgroundColor: "#fff",
 };
 
 export default ChartContainer;

@@ -33,41 +33,55 @@ const IntentTable = ({
     let tableData = [];
     data.data.map((x) => {
       let tempObj = {};
+      // Data manipulation using type of
       for (let y in x) {
-        // Data manipulation using type of
-        switch (typeof x[y]) {
-          // Can be array/object
-          case "object":
-            switch (typeof x[y][0]) {
-              // If nested object
-              case "object":
-                whitespaceRows.push(y);
-                let temp = [];
-                // Iterate over the array of objects
-                x[y].map((i) => {
-                  for (let j in i) {
-                    // Return `key - value` pair
-                    temp.push(`${j} - ${i[j]}\n`);
-                  }
-                  temp.push("\n");
-                });
-                tempObj[y] = temp.slice(0, -1).join("");
-                break;
-              // Just an array of strings
-              case "string":
-                tempObj[y] = x[y].join("\n");
-                break;
-              default:
-            }
-            break;
-          // Simple String
-          case "string":
-            tempObj[y] = x[y];
-            break;
-          default:
+        // Simple String
+        if (typeof x[y] === "string") {
+          tempObj[y] = x[y];
         }
+        // Can be array
+        if (Array.isArray(x[y])) {
+          // Array of strings?
+          if (typeof x[y][0] === "string") {
+            whitespaceRows.push(y);
+            tempObj[y] = x[y].join("\n");
+          }
+          // Array of objects
+          else if (typeof x[y][0] === "object") {
+            whitespaceRows.push(y);
+            let temp = [];
+            // Iterate over the array of objects
+            x[y].map((i) => {
+              for (let j in i) {
+                // Return `key - value` pair
+                temp.push(`${j} - ${i[j]}\n`);
+              }
+              temp.push("\n");
+            });
+            tempObj[y] = temp.slice(0, -1).join("");
+          }
+        }
+        // case Array.isArray(x[y]):
+        //   console.log("x[y] is array");
+        //   break;
+        //   switch (typeof x[y][0]) {
+        //     // If nested object
+        //     case "object":
+        //       whitespaceRows.push(y);
+        //       let temp = [];
+        //       // Iterate over the array of objects
+        //       x[y].map((i) => {
+        //         for (let j in i) {
+        //           // Return `key - value` pair
+        //           temp.push(`${j} - ${i[j]}\n`);
+        //         }
+        //         temp.push("\n");
+        //       });
+        //       tempObj[y] = temp.slice(0, -1).join("");
+        //       break;
+        //     // Just an array of strings
       }
-      return tableData.push(tempObj);
+      tableData.push(tempObj);
     });
     return tableData;
   });
