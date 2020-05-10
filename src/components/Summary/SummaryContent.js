@@ -32,7 +32,8 @@ const SummaryContent = () => {
     return () => {
       dispatch(clearSummary());
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const summaryData = useSelector((state) => state.summary);
 

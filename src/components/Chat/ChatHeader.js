@@ -63,6 +63,7 @@ const ChatHeader = () => {
   const dispatch = useDispatch();
 
   const signOut = () => {
+    sessionStorage.removeItem("datasetId");
     dispatch(deleteChat());
     history.push("/");
   };
