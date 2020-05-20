@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { GoogleLogout } from "react-google-login";
 import { Navbar, Collapse, Nav, NavItem } from "reactstrap";
 import { IconContext } from "react-icons";
 import {
@@ -13,6 +14,8 @@ import {
 } from "react-icons/fa";
 
 import { deleteChat } from "../../redux/actions/chatAction";
+import { userLogout } from "../../redux/actions/authAction";
+import { GOOGLE_CLIENT_ID } from "../../utils/const";
 
 import NavButton from "./NavButton";
 import LogoImg from "../../images/4.png";
@@ -65,6 +68,7 @@ const ChatHeader = () => {
   const signOut = () => {
     sessionStorage.removeItem("datasetId");
     dispatch(deleteChat());
+    dispatch(userLogout());
     history.push("/");
   };
   const [isOpen, setIsOpen] = useState(false);
@@ -124,12 +128,20 @@ const ChatHeader = () => {
             )}
           </NavItem>
           <NavItem className="mx-2">
-            <NavButton
-              text="Sign Out"
-              icon={<FaSignOutAlt />}
-              color="#A1373F"
-              size="0.875rem"
-              onClick={signOut}
+            <GoogleLogout
+              render={(renderProps) => (
+                <NavButton
+                  text="Sign Out"
+                  icon={<FaSignOutAlt />}
+                  color="#A1373F"
+                  size="0.875rem"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                />
+              )}
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Sign Out"
+              onLogoutSuccess={signOut}
             />
           </NavItem>
         </Nav>

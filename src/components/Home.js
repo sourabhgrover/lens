@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "reactstrap";
@@ -12,6 +13,11 @@ import Item1 from "../images/elements/1.png";
 import Item2 from "../images/elements/2.png";
 import Item3 from "../images/elements/3.png";
 import Item4 from "../images/elements/4.png";
+
+import { GoogleLogin } from "react-google-login";
+import { GOOGLE_CLIENT_ID } from "../utils/const";
+import { userLoginSucess } from "../redux/actions/authAction";
+import { LOGIN_FAIL } from "../redux/actions/type";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -105,8 +111,8 @@ const LogoText = styled.p`
 `;
 
 const Home = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
-
   return (
     <Wrapper>
       <BgItems>
@@ -134,14 +140,28 @@ const Home = () => {
           personas. Finally, its called Lens because you can really converse
           with it to know what inside your data!
         </p>
-        <NavButton
-          icon={<FaGoogle />}
-          text="Login with Google"
-          color="#A1373F"
-          className="align-self-center"
-          onClick={() => {
+        <GoogleLogin
+          clientId={GOOGLE_CLIENT_ID}
+          render={(renderProps) => (
+            <NavButton
+              icon={<FaGoogle />}
+              text="Login with Google"
+              color="#A1373F"
+              className="align-self-center"
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            />
+          )}
+          buttonText="Login with Google"
+          responseType="token"
+          accessType="offline"
+          onSuccess={(response) => {
+            dispatch(userLoginSucess(response));
             history.push("/chat");
           }}
+          onFailure={() => dispatch({ type: LOGIN_FAIL })}
+          cookiePolicy={"single_host_origin"}
+          uxMode="popup"
         />
       </Container>
       <Footer />
