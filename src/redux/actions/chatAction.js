@@ -1,7 +1,8 @@
 import lensApi from "../../apis/lensApi";
+import { refreshAccessToken } from "./authAction";
 import { BOT_RESPONSE, USER_REQUEST, DELETE_CHAT } from "./type";
 
-export const sendUserMessage = (userMessage) => {
+export const sendUserMessage = (userMessage, toDisplay = 1) => {
   return (dispatch) => {
     // Create request data
     let requestData = {
@@ -15,6 +16,7 @@ export const sendUserMessage = (userMessage) => {
     dispatch({
       type: USER_REQUEST,
       payload: requestData,
+      toDisplay,
     });
     lensApi
       .post("messages", requestData)
@@ -26,7 +28,13 @@ export const sendUserMessage = (userMessage) => {
           });
         }
       })
-      .catch((err) => console.log("Can’t access " + err));
+      .catch((err) => {
+        if (err.response.status === 401) {
+          dispatch(refreshAccessToken());
+        } else {
+          console.log("Can’t access " + err);
+        }
+      });
   };
 };
 
@@ -46,6 +54,8 @@ export const uploadFile = (file) => {
             type: BOT_RESPONSE,
             payload: res.data,
           });
+        } else if (res.status === 413) {
+          dispatch(refreshAccessToken());
         }
       })
       .catch((err) => {

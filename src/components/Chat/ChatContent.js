@@ -10,6 +10,7 @@ import { FIRST_MESSAGE } from "../../utils/const";
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
 import AttachmentController from "./AttachmentController";
+import store from "../../redux/store";
 
 const Main = styled(Container)`
   margin: 5rem 0;
@@ -40,10 +41,14 @@ class ChatContent extends React.Component {
   };
 
   componentDidMount() {
-    // Check if Chat doesnot exist send first message
-    if (this.props.chat === undefined || !this.props.chat.length) {
-      this.props.sendUserMessage(FIRST_MESSAGE);
-    }
+    // const authState = store.getState().session;
+    // const accessToken = authState.user?.tokenObj?.access_token;
+    // const profileID = authState.user?.profileObj.googleId;
+
+    // // Check if Chat doesnot exist send first message
+    // if (this.props.chat === undefined || !this.props.chat.length) {
+    //   this.props.sendUserMessage(FIRST_MESSAGE);
+    // }
     // If chat has some message scroll to bottom
     if (this.props.chat.length) {
       this.scrollToBottom();
@@ -66,7 +71,7 @@ class ChatContent extends React.Component {
     if (this.props.chat === undefined || !this.props.chat.length) {
       return (
         <Main fluid className="px-2 px-md-3 px-lg-5">
-          <div className="card-body msg_card_body">Please Begin Your Chat</div>
+          <div className="card-body msg_card_body">Initializing chat...</div>
         </Main>
       );
     }

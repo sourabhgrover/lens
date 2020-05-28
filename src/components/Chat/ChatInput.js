@@ -129,7 +129,7 @@ class ChatInput extends React.Component {
   // Reset Chat
   resetChat = () => {
     this.props.deleteChat();
-    this.props.sendUserMessage(FIRST_MESSAGE);
+    this.props.sendUserMessage(FIRST_MESSAGE, 0);
     this.props.hideQuickReply();
   };
   // Send Message on submit

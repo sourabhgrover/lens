@@ -1,3 +1,5 @@
+export const GOOGLE_CLIENT_ID = "765993726907-o0jlnaah6rmn6mifh77um2r4qaljd0jo.apps.googleusercontent.com"
+
 export const DOUGHNUT_CHART = "doughnut_chart";
 export const VERTICAL_BAR_CHART = "bargraph_vertical";
 export const HORIZONTAL_BAR_CHART = "bargraph_horizontal";

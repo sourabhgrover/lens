@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -9,13 +10,26 @@ import Table from "./Table/Table";
 import Summary from "./Summary/Summary";
 
 function App() {
+  const session = useSelector((state) => state.session);
+  const AuthenticatedRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) =>
+        session.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={{ pathname: "/" }} />
+        )
+      }
+    />
+  );
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/table" render={(props) => <Table {...props} />}></Route>
-        <Route path="/chat" component={Chat}></Route>
-        <Route path="/summary" component={Summary}></Route>
+        <Route path="/" exact component={Home} />
+        <Route path="/table" component={Table} />
+        <AuthenticatedRoute path="/chat" component={Chat} />
+        <AuthenticatedRoute path="/summary" component={Summary} />
       </Switch>
     </BrowserRouter>
   );
