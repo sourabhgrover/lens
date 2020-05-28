@@ -27,10 +27,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <AuthenticatedRoute
-          path="/table"
-          render={(props) => <Table {...props} />}
-        />
+        <Route path="/table" component={Table} />
         <AuthenticatedRoute path="/chat" component={Chat} />
         <AuthenticatedRoute path="/summary" component={Summary} />
       </Switch>

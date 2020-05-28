@@ -19,7 +19,7 @@ const Table = (props) => {
           />
         ) : (
           <Fragment>
-            <Redirect to="/chat" />
+            <Redirect to="/" />
             <h3>
               Looks like you came to this page directly. Please use the `Read
               More` button above any table to return to this page with proper
