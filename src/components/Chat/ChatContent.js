@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import { sendUserMessage, deleteChat } from "../../redux/actions/chatAction";
 import { BOT, USER } from "../../redux/actions/type";
-import { FIRST_MESSAGE } from "../../utils/const";
 
 import UserMessage from "./UserMessage";
 import BotMessage from "./BotMessage";
@@ -30,7 +29,7 @@ class ChatContent extends React.Component {
   }
 
   scrollToBottom = (direct = false) => {
-    // passing direct to this forces scrolling instantly, instead of animating.
+    // passing `direct` to this forces scrolling instantly, instead of animating.
     if (this.ref.current?.scrollIntoView) {
       this.ref.current.scrollIntoView({ behavior: direct ? "auto" : "smooth" });
     }
@@ -70,9 +69,9 @@ class ChatContent extends React.Component {
   render() {
     if (this.props.chat === undefined || !this.props.chat.length) {
       return (
-        <Main fluid className="px-2 px-md-3 px-lg-5">
-          <div className="card-body msg_card_body">Initializing chat...</div>
-        </Main>
+        <div className="loader-container">
+          <div className="loader">Initializing Chat...</div>
+        </div>
       );
     }
     return (
